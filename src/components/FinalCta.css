@@ -1,0 +1,91 @@
+/* ─── CTA final ─── */
+/* Bloque oscuro que cierra la pagina y se funde con el pie, que usa el
+   mismo color. Es el contrapunto al resto, que va claro. */
+
+.cta-final {
+  position: relative;
+  z-index: 1;
+  background: var(--solido);
+  padding: var(--space-900) var(--space-400) var(--space-800);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Brasa azul arriba, para que el bloque no entre como un rectangulo muerto. */
+.cta-final::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 70%;
+  background: radial-gradient(70% 100% at 50% 0%, rgba(0, 124, 232, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-final__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.cta-final__titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(var(--text-4xl), 5vw, var(--text-5xl));
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 var(--space-300);
+  text-wrap: balance;
+}
+
+.cta-final__sub {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: #B9C0CA;
+  margin: 0 auto var(--space-500);
+  max-width: 480px;
+  text-wrap: pretty;
+}
+
+.cta-final__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-200);
+}
+
+/* Sobre el bloque oscuro el boton secundario necesita su propio contraste:
+   el borde y el texto de la version clara desaparecerian. */
+.cta-final .rf-btn--secundario {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.cta-final .rf-btn--secundario:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.cta-final__nota {
+  margin: var(--space-300) 0 var(--space-600);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+.cta-final__cruzado {
+  margin: var(--space-600) 0 0;
+  font-size: var(--text-sm);
+  color: #8B939F;
+}
+.cta-final__cruzado a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  padding-bottom: var(--space-25);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.cta-final__cruzado a:hover { border-color: var(--rojo); }

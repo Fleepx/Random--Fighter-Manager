@@ -1,0 +1,185 @@
+/* ─── Planes ─── */
+
+.planes {
+  background: transparent;
+  padding: var(--space-900) var(--space-400);
+}
+
+.planes__inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.planes__cabecera {
+  text-align: center;
+  margin-bottom: var(--space-700);
+}
+
+.planes__nota {
+  font-size: var(--text-base);
+  color: var(--texto-suave);
+  margin: 0 auto var(--space-500);
+  max-width: 460px;
+  text-wrap: pretty;
+}
+
+/* ─── Selector de periodo ─── */
+
+.planes__periodos {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-50);
+  padding: var(--space-50);
+  background: var(--bg-hondo);
+  border-radius: 999px;
+}
+
+.periodo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-75);
+  padding: var(--space-75) var(--space-300);
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-suave);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.periodo:hover { color: var(--texto); }
+.periodo.is-activo {
+  background: var(--superficie);
+  color: var(--texto);
+  box-shadow: 0 1px 3px rgba(18, 20, 23, 0.12);
+}
+
+.periodo__descuento {
+  font-size: var(--text-xs);
+  color: var(--azul);
+}
+
+/* ─── Tarjetas ─── */
+
+.planes__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-400);
+  align-items: start;
+}
+
+/* El fondo y el borde los pone .rf-rasgado. Aca solo el aire interior,
+   generoso porque el contorno desplazado entra unos pixeles. */
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-600) var(--space-500);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.plan:hover { transform: translateY(-4px); }
+
+.plan--destacado::before {
+  border-color: var(--azul);
+  border-width: 2px;
+}
+
+.plan__insignia {
+  align-self: flex-start;
+  margin-bottom: var(--space-200);
+  padding: var(--space-25) var(--space-100);
+  background: var(--azul);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.plan__nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--texto);
+  margin: 0 0 var(--space-75);
+}
+
+.plan__descripcion {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--texto-suave);
+  margin: 0 0 var(--space-400);
+  text-wrap: pretty;
+}
+
+.plan__precio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-25);
+  margin: 0 0 var(--space-400);
+  padding-bottom: var(--space-400);
+  border-bottom: 1px solid var(--borde);
+}
+.plan__monto {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--texto);
+}
+.plan__periodo,
+.plan__sin-precio {
+  font-size: var(--text-sm);
+  color: var(--texto-suave);
+}
+.plan__sin-precio { font-style: normal; }
+
+.plan__incluye {
+  list-style: none;
+  margin: 0 0 var(--space-500);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  flex-grow: 1;
+}
+.plan__incluye li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-200);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--texto);
+  text-wrap: pretty;
+}
+
+.plan__cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+.planes__pie {
+  margin: var(--space-600) 0 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--texto-suave);
+}
+.planes__pie a {
+  color: var(--azul);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.planes__pie a:hover { border-color: var(--azul); }
+
+@media (max-width: 640px) {
+  .plan { padding: var(--space-500) var(--space-400); }
+}

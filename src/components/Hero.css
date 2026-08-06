@@ -1,0 +1,117 @@
+/* ─── Hero ─── */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: var(--space-900) var(--space-400) var(--space-700);
+  background: transparent;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-900);
+}
+
+.hero__logo {
+  width: clamp(180px, 20vw, 250px);
+  height: auto;
+  display: block;
+  margin-bottom: var(--space-500);
+}
+
+/* Degradado solo en el texto del titulo, la version clara de la regla:
+   negro a gris medio. Es el unico lugar con degradado sobre texto. */
+.hero__titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: var(--measure);
+  margin-bottom: var(--space-300);
+  background: linear-gradient(to right, #000000, #666666);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-wrap: balance;
+}
+
+.hero__sub {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--texto-suave);
+  max-width: var(--measure);
+  margin-bottom: var(--space-500);
+  text-wrap: pretty;
+}
+
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-200);
+}
+
+.hero__prueba {
+  margin-top: var(--space-300);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-200);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+.hero__prueba-fuerte { color: var(--azul); }
+.hero__prueba-sep {
+  width: 4px;
+  height: 4px;
+  background: var(--azul);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ─── Captura ─── */
+
+.hero__visual { flex-shrink: 0; }
+
+.hero__captura {
+  width: 280px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  box-shadow: 0 32px 64px rgba(18, 20, 23, 0.16);
+}
+
+@media (max-width: 980px) {
+  /* La isla del menu flota fija arriba: sin este aire el logo del hero le
+     quedaba justo debajo y se tapaban entre si. */
+  .hero {
+    padding-top: calc(var(--space-900) + var(--space-700));
+    padding-bottom: var(--space-600);
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-600);
+  }
+  .hero__logo { margin-inline: auto; }
+  .hero__titulo,
+  .hero__sub { margin-inline: auto; }
+  .hero__acciones,
+  .hero__prueba { justify-content: center; }
+  .hero__captura { width: 240px; }
+}

@@ -1,0 +1,67 @@
+/* ─── Problema a solucion ─── */
+
+.problema {
+  background: transparent;
+  padding: var(--space-900) var(--space-400);
+}
+
+.problema__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.problema__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-400);
+  margin-top: var(--space-700);
+}
+
+/* El fondo y el borde los pone .rf-rasgado desde global.css. Aca solo va
+   el aire interior, que tiene que ser generoso para que el borde
+   desplazado no invada el texto. */
+.problema__col {
+  padding: var(--space-600) var(--space-500);
+}
+
+.problema__col-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-400);
+}
+.problema__col-titulo--antes   { color: var(--texto-suave); }
+.problema__col-titulo--despues { color: var(--azul); }
+
+.problema__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
+}
+.problema__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-200);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--texto);
+  text-wrap: pretty;
+}
+
+/* La columna del estado viejo va en gris: se lee como lo que se deja atras. */
+.problema__col:has(.rf-cuchilla--apagada) .problema__lista li {
+  color: var(--texto-suave);
+}
+
+@media (max-width: 760px) {
+  .problema__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-300);
+  }
+  .problema__col { padding: var(--space-400); }
+}

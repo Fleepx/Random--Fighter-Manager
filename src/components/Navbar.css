@@ -1,0 +1,323 @@
+/* ─── Navbar: isla flotante ─── */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Centinela de un pixel en el tope del documento. Mientras se ve, la
+   barra va ancha; cuando sale de cuadro, se arma la isla. */
+.nav__centinela {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* Arriba de todo la barra va ancha, transparente y pegada al techo.
+   Al bajar se encoge a una pastilla flotante con vidrio. */
+/* Grilla de tres columnas con los costados iguales: asi los enlaces
+   quedan centrados de verdad. Con flex y margenes automaticos el centro
+   se corria la mitad de la diferencia entre el ancho del logo y el del
+   boton, que no son iguales. */
+.nav__isla {
+  pointer-events: auto;
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-300);
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-300) var(--space-400);
+  border-radius: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: margin-top var(--dur-slow) var(--ease-out),
+              width var(--dur-slow) var(--ease-out),
+              max-width var(--dur-slow) var(--ease-out),
+              padding var(--dur-slow) var(--ease-out),
+              border-radius var(--dur-slow) var(--ease-out),
+              border-color var(--dur-slow) var(--ease-out),
+              background-color var(--dur-slow) var(--ease-out),
+              backdrop-filter var(--dur-slow) var(--ease-out);
+}
+
+.nav__marca { justify-self: start; }
+.nav__cta   { justify-self: end; }
+
+/* Armada la isla se vuelve a flex: ahi los tres elementos se pegan entre
+   si y la pastilla mide lo que mide su contenido. */
+.nav.is-isla .nav__isla {
+  display: flex;
+  margin-top: var(--space-300);
+  width: max-content;
+  max-width: calc(100vw - var(--space-400));
+  padding: var(--space-75) var(--space-75) var(--space-75) var(--space-300);
+  border-radius: 999px;
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav__marca {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.nav__logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* Con la barra ancha los margenes automaticos empujan por los dos lados,
+   asi los enlaces quedan centrados con la marca a la izquierda y el boton
+   a la derecha. Al armarse la isla vuelven a pegarse. */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+.nav.is-isla .nav__links { margin: 0; }
+.nav__links a {
+  position: relative;
+  display: block;
+  padding-bottom: var(--space-50);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__links a:hover { color: var(--texto); }
+
+/* Subrayado que crece desde el centro para marcar la seccion en pantalla.
+   El color tambien cambia, para no depender solo de la linea. */
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  height: 2px;
+  background: var(--azul);
+  border-radius: 1px;
+  transition: left var(--dur-base) var(--ease-out),
+              right var(--dur-base) var(--ease-out);
+}
+.nav__links a.is-activa {
+  color: var(--texto);
+}
+.nav__links a.is-activa::after {
+  left: 0;
+  right: 0;
+}
+
+.nav__cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto);
+  text-decoration: none;
+  background: var(--azul);
+  padding: var(--space-75) var(--space-300);
+  /* Radio interno: la isla es 999px pero el gap real es 8px, asi que el
+     boton usa una pastilla propia en vez de heredar el radio del contenedor. */
+  border-radius: 999px;
+  transition: transform var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+.nav__cta:hover  { filter: brightness(1.12); transform: translateY(-1px); }
+.nav__cta:active { transform: translateY(1px) scale(0.98); }
+
+/* ─── Hamburguesa ─── */
+
+.nav__burger {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav__burger-linea {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.nav__burger-linea:nth-child(1) { transform: translate(-50%, -4px); }
+.nav__burger-linea:nth-child(2) { transform: translate(-50%, 4px); }
+
+/* Las lineas rotan hasta cruzarse. Nunca desaparecen: giran hasta la X. */
+.nav__burger.is-open .nav__burger-linea:nth-child(1) {
+  transform: translate(-50%, 0) rotate(45deg);
+}
+.nav__burger.is-open .nav__burger-linea:nth-child(2) {
+  transform: translate(-50%, 0) rotate(-45deg);
+}
+
+/* ─── Overlay ─── */
+
+.nav__overlay {
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  background: rgba(242, 243, 245, 0.92);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-base) var(--ease-out),
+              visibility var(--dur-base) var(--ease-out);
+}
+.nav__overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ─── Cerrar ─── */
+/* Arriba a la derecha, fuera del camino de los enlaces. Salir del menu no
+   puede depender de elegir una opcion. */
+.nav__cerrar {
+  position: absolute;
+  top: var(--space-400);
+  right: var(--space-400);
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--borde);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+  transition-delay: 150ms;
+}
+.nav__overlay.is-open .nav__cerrar {
+  opacity: 1;
+  transform: scale(1);
+}
+.nav__cerrar:hover { border-color: var(--azul); }
+.nav__cerrar:active { transform: scale(0.94); }
+
+.nav__cerrar-linea {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+}
+.nav__cerrar-linea:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+.nav__cerrar-linea:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.nav__overlay-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-500);
+}
+
+/* Cada item sube desde abajo con su propio retardo, en cascada. */
+.nav__overlay-links li {
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.nav__overlay.is-open .nav__overlay-links li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav__overlay-links a {
+  position: relative;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__overlay-links a:hover { color: var(--texto); }
+
+/* En el menu abierto la seccion actual va en blanco con un punto rojo
+   delante, porque a este tamano un subrayado se pierde. */
+.nav__overlay-links a.is-activa {
+  color: var(--texto);
+}
+.nav__overlay-links a.is-activa::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-300) * -1);
+  top: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  background: var(--azul);
+  border-radius: var(--radius-sm);
+}
+
+.nav__overlay-cta {
+  display: inline-block;
+  background: var(--azul);
+  padding: var(--space-100) var(--space-500);
+  border-radius: 999px;
+  font-size: var(--text-lg) !important;
+  margin-top: var(--space-300);
+}
+.nav__overlay-cta:hover { color: #fff !important; filter: brightness(1.12); }
+
+@media (max-width: 860px) {
+  .nav__links,
+  .nav__cta { display: none; }
+  .nav__burger { display: block; }
+
+  /* Sin enlaces ni boton quedan solo marca y hamburguesa: la grilla de
+     tres columnas sobra, con flex a los extremos alcanza. */
+  .nav__isla {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-200);
+  }
+  .nav.is-isla .nav__isla {
+    justify-content: flex-start;
+    padding: var(--space-75) var(--space-75) var(--space-75) var(--space-300);
+  }
+}

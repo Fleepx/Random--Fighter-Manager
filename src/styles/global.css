@@ -1,0 +1,271 @@
+/* ─── GLOBAL: variables + reset ─── */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ─── Paleta Manager ─── */
+  /* Tema claro, al reves que Fighter. La app de Manager es clara y quien
+     compra es un dueño de gimnasio evaluando software, no un peleador.
+     Si alguna vez se decide pasarlo a oscuro, se cambian estos valores y
+     el resto de la pagina sigue funcionando: nada tiene colores a mano. */
+  --azul:           #007CE8;
+  --azul-oscuro:    #0268C2;
+  --azul-claro:     #E8F2FC;
+
+  --bg:             #F2F3F5;
+  --bg-hondo:       #E4E7EB;
+  --superficie:     #FFFFFF;
+  --borde:          #D8DCE2;
+
+  --texto:          #121417;
+  --texto-suave:    #5A6270;
+
+  /* Rojo de Fighter, solo para enlazar al otro producto. */
+  --rojo:           #C0392B;
+
+  /* ─── Type scale ─── */
+  --text-xs:    0.75rem;   /* 12px */
+  --text-sm:    0.875rem;  /* 14px */
+  --text-base:  1rem;      /* 16px */
+  --text-lg:    1.125rem;  /* 18px */
+  --text-xl:    1.25rem;   /* 20px */
+  --text-2xl:   1.5rem;    /* 24px */
+  --text-3xl:   1.875rem;  /* 30px */
+  --text-4xl:   2.25rem;   /* 36px */
+  --text-5xl:   3rem;      /* 48px */
+  --text-6xl:   3.75rem;   /* 60px */
+
+  /* ─── Spacing ─── */
+  --space-25:   0.125rem;
+  --space-50:   0.25rem;
+  --space-75:   0.5rem;
+  --space-100:  0.75rem;
+  --space-200:  1rem;
+  --space-300:  1.5rem;
+  --space-400:  2rem;
+  --space-500:  2.5rem;
+  --space-600:  3rem;
+  --space-700:  4rem;
+  --space-800:  5rem;
+  --space-900:  6rem;
+
+  /* ─── Radius ─── */
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+
+  /* ─── Motion ─── */
+  --ease-out:    cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    0.2s;
+  --dur-base:    0.4s;
+  --dur-slow:    0.8s;
+
+  /* ─── Layout ─── */
+  --measure: 680px;
+
+  /* ─── Superficies ─── */
+  --tarjeta: #FFFFFF;
+  --panel:   #FFFFFF;
+  --solido:  #101418;  /* bloque oscuro que corta la pagina */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-900);
+}
+
+body {
+  background: var(--bg);
+  color: var(--texto);
+  font-family: 'Barlow', sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ─── Piezas compartidas ─── */
+
+.rf-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--azul);
+  margin-bottom: var(--space-100);
+}
+
+.rf-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--texto);
+  line-height: 0.95;
+  margin-bottom: var(--space-300);
+  text-wrap: balance;
+}
+
+.rf-body-text {
+  color: var(--texto-suave);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+/* ─── Botones ─── */
+
+.rf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-75);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-100) var(--space-500);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out);
+}
+.rf-btn:hover  { transform: translateY(-2px); filter: brightness(1.08); }
+.rf-btn:active { transform: translateY(1px) scale(0.98); }
+
+.rf-btn--primario {
+  background: var(--azul);
+  color: #fff;
+}
+.rf-btn--secundario {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--borde);
+}
+.rf-btn--secundario:hover {
+  border-color: var(--azul);
+  color: var(--azul);
+  filter: none;
+}
+
+/* ─── Reveal al hacer scroll ─── */
+/* El atributo lo pone useReveal. Va como data y no como clase porque
+   React reescribe className en cada render y se llevaria una clase puesta
+   a mano, dejando el elemento invisible. */
+.rf-reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+  filter: blur(6px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out),
+              filter var(--dur-slow) var(--ease-out);
+}
+.rf-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ─── Hoja rasgada ─── */
+
+.efectos-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* El fondo vive en ::before y es lo unico que recibe el filtro. Aplicado
+   al elemento, el texto se deformaria con el. */
+.rf-rasgado {
+  position: relative;
+  background: transparent;
+  border: none;
+}
+.rf-rasgado > * {
+  position: relative;
+  z-index: 1;
+}
+.rf-rasgado::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  filter: url(#rasgado-1);
+}
+.rf-rasgado--2::before { filter: url(#rasgado-2); }
+.rf-rasgado--3::before { filter: url(#rasgado-3); }
+
+/* ─── Vinetas de lista ─── */
+
+.rf-cuchilla {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 0.35rem;
+  background: var(--azul);
+  clip-path: polygon(0 18%, 62% 0, 100% 34%, 44% 100%, 0 72%);
+}
+.rf-cuchilla--apagada {
+  background: var(--texto-suave);
+  opacity: 0.4;
+  clip-path: polygon(0 42%, 100% 22%, 100% 58%, 0 78%);
+}
+
+/* ─── Accesibilidad ─── */
+
+:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.rf-skip-link {
+  position: absolute;
+  top: var(--space-200);
+  left: var(--space-200);
+  z-index: 999;
+  padding: var(--space-100) var(--space-300);
+  background: var(--azul);
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transform: translateY(-150%);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.rf-skip-link:focus {
+  transform: translateY(0);
+}

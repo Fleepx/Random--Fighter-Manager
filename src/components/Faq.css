@@ -1,0 +1,129 @@
+/* ─── Preguntas frecuentes ─── */
+
+.faq {
+  background: transparent;
+  padding: var(--space-900) var(--space-400);
+}
+
+.faq__inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.faq__cabecera {
+  margin-bottom: var(--space-700);
+}
+
+.faq__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+}
+
+.faq__item {
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-lg);
+  background: var(--tarjeta);
+  overflow: hidden;
+  transition: border-color var(--dur-base) var(--ease-out),
+              background-color var(--dur-base) var(--ease-out);
+}
+.faq__item.is-abierta {
+  border-color: var(--azul);
+  background: var(--azul-claro);
+}
+
+/* El h3 solo aporta jerarquia; el estilo lo lleva el boton de adentro. */
+.faq__encabezado {
+  margin: 0;
+  font: inherit;
+}
+
+.faq__pregunta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-300);
+  padding: var(--space-300) var(--space-400);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--texto);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.faq__pregunta:hover { color: var(--azul); }
+
+/* ─── Panel que se despliega ─── */
+
+/* La grilla pasa de 0fr a 1fr: eso si se puede animar, a diferencia de
+   height auto, y sin tener que adivinar un max-height que se queda corto
+   cuando la respuesta es larga. */
+.faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+.faq__item.is-abierta .faq__panel {
+  grid-template-rows: 1fr;
+}
+
+/* overflow hidden es obligatorio para que el hijo se deje recortar
+   mientras la fila crece. */
+.faq__panel-interior {
+  overflow: hidden;
+}
+
+/* El texto ademas sube y aparece, para que el despliegue no sea solo
+   la caja abriendose. */
+.faq__respuesta {
+  margin: 0;
+  padding: 0 var(--space-400) var(--space-400);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--texto-suave);
+  text-wrap: pretty;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition: opacity var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.faq__item.is-abierta .faq__respuesta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 120ms;
+}
+
+/* ─── Cruz ─── */
+/* Gira hasta volverse una linea al abrir. */
+.faq__cruz {
+  position: relative;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.faq__cruz::before,
+.faq__cruz::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 2px;
+  background: var(--azul);
+  border-radius: 1px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.faq__cruz::after { transform: rotate(90deg); }
+.faq__item.is-abierta .faq__cruz { transform: rotate(180deg); }
+.faq__item.is-abierta .faq__cruz::after { transform: rotate(0deg); }
+
+@media (max-width: 640px) {
+  .faq__pregunta { padding: var(--space-300); font-size: var(--text-base); }
+  .faq__respuesta { padding: 0 var(--space-300) var(--space-300); }
+}

@@ -1,0 +1,207 @@
+/* ─── Contacto ─── */
+
+.contacto {
+  background: transparent;
+  padding: var(--space-800) var(--space-400);
+  display: flex;
+  justify-content: center;
+}
+
+/* Aire generoso: el borde rasgado se desplaza hacia adentro y sin margen
+   le pasaria por encima al contenido. */
+.contacto__caja {
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-700) var(--space-600);
+  text-align: center;
+}
+
+.contacto__titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--texto);
+  margin: 0 0 var(--space-300);
+  text-wrap: balance;
+}
+
+.contacto__texto {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--texto-suave);
+  max-width: 440px;
+  margin: 0 auto var(--space-600);
+  text-wrap: pretty;
+}
+
+/* ─── Formulario ─── */
+
+.contacto__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  text-align: left;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-75);
+}
+
+.campo label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: var(--space-100) var(--space-200);
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-md);
+  color: var(--texto);
+  font-family: inherit;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+  border-color: rgba(0, 124, 232, 0.5);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--azul);
+  background: var(--superficie);
+}
+
+/* El anillo de foco global sigue apareciendo para quien navega con
+   teclado; aca solo se refuerza el borde. */
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+}
+
+.campo .tiene-error {
+  border-color: var(--azul);
+  background: #FFF5F5;
+}
+
+.campo__error {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: #FF8A7A;
+}
+
+/* La flecha del select nativo se ve gris de sistema: se dibuja una propia. */
+.campo select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--azul) 50%),
+                    linear-gradient(135deg, var(--azul) 50%, transparent 50%);
+  background-position: right 1.15rem center, right 0.85rem center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: var(--space-600);
+}
+.campo select option {
+  background: #140606;
+  color: var(--texto);
+}
+
+.contacto__enviar {
+  margin-top: var(--space-100);
+  padding: var(--space-100) var(--space-500);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--azul);
+  color: var(--texto);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+.contacto__enviar:hover  { transform: translateY(-2px); filter: brightness(1.12); }
+.contacto__enviar:active { transform: translateY(1px) scale(0.98); }
+.contacto__enviar:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+.contacto__volver {
+  margin-top: var(--space-300);
+  padding: var(--space-75) var(--space-400);
+  background: transparent;
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-sm);
+  color: var(--texto);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.contacto__volver:hover { border-color: var(--azul); color: var(--texto); }
+
+/* ─── Vias directas ─── */
+
+.contacto__secundarias {
+  margin: var(--space-500) 0 0;
+  font-size: var(--text-sm);
+  color: var(--texto-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-200);
+}
+.contacto__secundarias a {
+  color: var(--texto);
+  text-decoration: none;
+  border-bottom: 1px solid var(--borde);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.contacto__secundarias a:hover { border-color: var(--azul); }
+
+.contacto__sep {
+  width: 4px;
+  height: 4px;
+  background: var(--azul);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+@media (max-width: 620px) {
+  .contacto__caja { padding: var(--space-600) var(--space-400); }
+}
