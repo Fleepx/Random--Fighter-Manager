@@ -66,7 +66,7 @@
   padding: var(--space-75) var(--space-75) var(--space-75) var(--space-300);
   border-radius: 999px;
   border-color: rgba(255, 255, 255, 0.09);
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(11, 14, 18, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -167,7 +167,7 @@
   left: 50%;
   width: 20px;
   height: 2px;
-  background: #fff;
+  background: var(--texto);
   border-radius: 2px;
   transition: transform var(--dur-base) var(--ease-out);
 }
@@ -188,7 +188,7 @@
   pointer-events: auto;
   position: fixed;
   inset: 0;
-  background: rgba(242, 243, 245, 0.92);
+  background: rgba(7, 10, 13, 0.9);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   display: flex;
@@ -237,7 +237,7 @@
   left: 50%;
   width: 18px;
   height: 2px;
-  background: #fff;
+  background: var(--texto);
   border-radius: 1px;
 }
 .nav__cerrar-linea:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }

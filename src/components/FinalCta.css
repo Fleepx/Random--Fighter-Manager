@@ -34,7 +34,7 @@
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--texto);
   margin: 0 0 var(--space-300);
   text-wrap: balance;
 }
@@ -42,7 +42,7 @@
 .cta-final__sub {
   font-size: var(--text-lg);
   line-height: 1.7;
-  color: #B9C0CA;
+  color: var(--texto-suave);
   margin: 0 auto var(--space-500);
   max-width: 480px;
   text-wrap: pretty;
@@ -58,11 +58,11 @@
 /* Sobre el bloque oscuro el boton secundario necesita su propio contraste:
    el borde y el texto de la version clara desaparecerian. */
 .cta-final .rf-btn--secundario {
-  color: #fff;
+  color: var(--texto);
   border-color: rgba(255, 255, 255, 0.28);
 }
 .cta-final .rf-btn--secundario:hover {
-  color: #fff;
+  color: var(--texto);
   border-color: #fff;
 }
 
@@ -79,10 +79,10 @@
 .cta-final__cruzado {
   margin: var(--space-600) 0 0;
   font-size: var(--text-sm);
-  color: #8B939F;
+  color: var(--texto-suave);
 }
 .cta-final__cruzado a {
-  color: #fff;
+  color: var(--texto);
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.28);
   padding-bottom: var(--space-25);

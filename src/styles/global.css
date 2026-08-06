@@ -12,21 +12,23 @@
 
 :root {
   /* ─── Paleta Manager ─── */
-  /* Tema claro, al reves que Fighter. La app de Manager es clara y quien
-     compra es un dueño de gimnasio evaluando software, no un peleador.
-     Si alguna vez se decide pasarlo a oscuro, se cambian estos valores y
-     el resto de la pagina sigue funcionando: nada tiene colores a mano. */
-  --azul:           #007CE8;
+  /* Oscuro, como Fighter, pero en clave fria para que no se confundan.
+     Fighter es negro calido con rojo, tierra de tatami. Manager es negro
+     azulado, mas cerca de una sala de control que de un gimnasio: quien
+     compra aca administra un negocio.
+     Nada tiene colores a mano en los componentes, todo sale de estas
+     variables, asi que la paleta se puede volver a mover de una sola vez. */
+  --azul:           #1E90FF;
   --azul-oscuro:    #0268C2;
-  --azul-claro:     #E8F2FC;
+  --azul-hondo:     #0A2540;
 
-  --bg:             #F2F3F5;
-  --bg-hondo:       #E4E7EB;
-  --superficie:     #FFFFFF;
-  --borde:          #D8DCE2;
+  --bg:             #0B0E12;
+  --bg-hondo:       #070A0D;
+  --superficie:     #131922;
+  --borde:          #232D3A;
 
-  --texto:          #121417;
-  --texto-suave:    #5A6270;
+  --texto:          #E9EEF4;
+  --texto-suave:    #97A4B4;
 
   /* Rojo de Fighter, solo para enlazar al otro producto. */
   --rojo:           #C0392B;
@@ -73,9 +75,11 @@
   --measure: 680px;
 
   /* ─── Superficies ─── */
-  --tarjeta: #FFFFFF;
-  --panel:   #FFFFFF;
-  --solido:  #101418;  /* bloque oscuro que corta la pagina */
+  --tarjeta: rgba(19, 25, 34, 0.72);
+  --panel:   rgba(19, 25, 34, 0.72);
+  /* Losa que corta la atmosfera. En una pagina oscura no puede ser mas
+     oscura todavia o no se nota: va levantada y con tinte azul. */
+  --solido:  #0F1A28;
 }
 
 @media (prefers-reduced-motion: reduce) {

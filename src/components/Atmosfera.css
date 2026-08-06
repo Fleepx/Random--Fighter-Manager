@@ -1,5 +1,5 @@
 /* ─── Atmosfera ─── */
-/* Version clara. Ver Atmosfera.jsx para por que no hay tatami aca. */
+/* Contraparte fria de la de Fighter. Ver Atmosfera.jsx. */
 
 .atm {
   position: fixed;
@@ -10,16 +10,17 @@
   overflow: hidden;
 }
 
-/* El mismo muro de cemento que en Fighter, pero invertido y casi
-   transparente: aporta grano al plano claro sin ensuciarlo. */
+/* El mismo muro de cemento que en Fighter, pero virado a azul con
+   hue-rotate en vez de teñirlo con una capa encima: asi conserva el
+   relieve de la piedra. */
 .atm__muro {
   position: absolute;
   inset: 0;
   background-image: url('../assets/imgs/fondo-cemento.jpg');
   background-size: cover;
   background-position: center;
-  filter: invert(1);
-  opacity: 0.06;
+  filter: hue-rotate(185deg) saturate(1.6) brightness(1.15);
+  opacity: 0.42;
 }
 
 /* Luz azul entrando por los costados, la contraparte del rojo de Fighter. */
@@ -27,24 +28,39 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60vw 70vh at -10% 30%, rgba(0, 124, 232, 0.14), transparent 70%),
-    radial-gradient(55vw 65vh at 110% 68%, rgba(0, 124, 232, 0.10), transparent 70%);
+    radial-gradient(62vw 70vh at -10% 32%, rgba(30, 144, 255, 0.26), transparent 70%),
+    radial-gradient(55vw 65vh at 110% 66%, rgba(30, 144, 255, 0.20), transparent 70%),
+    radial-gradient(80vw 40vh at 50% -8%, rgba(30, 144, 255, 0.12), transparent 72%);
 }
 
-/* Ruido generado con SVG, sin pedir archivos. En claro va aun mas bajo:
-   sobre fondos claros el grano se nota mucho mas que sobre negro. */
+/* Viñeta: cierra las esquinas y empuja la mirada al centro. */
+.atm::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 45%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.5) 76%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+/* Ruido generado con SVG, sin pedir archivos al servidor. Rompe las
+   bandas que aparecen en los degradados oscuros. */
 .atm__grano {
   position: absolute;
   inset: -50%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23r)' opacity='0.5'/%3E%3C/svg%3E");
-  opacity: 0.05;
-  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23r)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.13;
+  mix-blend-mode: overlay;
 }
 
 @media (max-width: 760px) {
   .atm__luz {
     background:
-      radial-gradient(95vw 38vh at -25% 24%, rgba(0, 124, 232, 0.12), transparent 72%),
-      radial-gradient(95vw 38vh at 125% 74%, rgba(0, 124, 232, 0.09), transparent 72%);
+      radial-gradient(95vw 38vh at -25% 26%, rgba(30, 144, 255, 0.2), transparent 72%),
+      radial-gradient(95vw 38vh at 125% 74%, rgba(30, 144, 255, 0.16), transparent 72%);
   }
+  .atm__muro { opacity: 0.3; }
 }

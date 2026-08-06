@@ -106,7 +106,7 @@
 
 .campo .tiene-error {
   border-color: var(--azul);
-  background: #FFF5F5;
+  background: rgba(80, 20, 20, 0.35);
 }
 
 .campo__error {
