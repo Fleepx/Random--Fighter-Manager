@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { NAV_LINKS } from "../data/site";
 import { useSeccionActiva } from "../hooks/useSeccionActiva";
 import Marca from "./Marca";
+import GlareHover from "./GlareHover";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -76,9 +77,26 @@ export default function Navbar() {
             })}
           </ul>
 
-          <a href="#planes" className="nav__cta">
-            Empezar gratis
-          </a>
+          {/* El destello barre el boton al pasar el cursor. Va con
+              background transparent para no tapar el azul del boton, que lo
+              pone el propio .nav__cta. */}
+          <GlareHover
+            className="nav__cta-marco"
+            width="auto"
+            height="auto"
+            background="transparent"
+            borderColor="transparent"
+            borderRadius="999px"
+            glareColor="#ffffff"
+            glareOpacity={0.45}
+            glareAngle={-35}
+            glareSize={220}
+            transitionDuration={750}
+          >
+            <a href="#planes" className="nav__cta">
+              Empezar gratis
+            </a>
+          </GlareHover>
 
           <button
             type="button"
