@@ -19,15 +19,6 @@ export default function FinalCta() {
           sirve, no sigues. Sin permanencia mínima.
         </p>
 
-        <div className="cta-final__acciones">
-          <a href="#planes" className="rf-btn rf-btn--primario">
-            Empezar gratis
-          </a>
-          <a href="#contacto" className="rf-btn rf-btn--secundario">
-            Hablar con nosotros
-          </a>
-        </div>
-
         <div className="tiendas cta-final__tiendas">
           <BotonTienda tienda="google" href={PLAY_STORE_URL} />
           <BotonTienda tienda="apple" disponible={false} />

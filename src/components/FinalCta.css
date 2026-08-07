@@ -43,28 +43,9 @@
   font-size: var(--text-lg);
   line-height: 1.7;
   color: var(--texto-suave);
-  margin: 0 auto var(--space-500);
+  margin: 0 auto var(--space-600);
   max-width: 480px;
   text-wrap: pretty;
-}
-
-.cta-final__acciones {
-  margin-bottom: var(--space-600);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-200);
-}
-
-/* Sobre el bloque oscuro el boton secundario necesita su propio contraste:
-   el borde y el texto de la version clara desaparecerian. */
-.cta-final .rf-btn--secundario {
-  color: var(--texto);
-  border-color: rgba(255, 255, 255, 0.28);
-}
-.cta-final .rf-btn--secundario:hover {
-  color: var(--texto);
-  border-color: #fff;
 }
 
 .cta-final__cruzado {
