@@ -21,13 +21,6 @@
   gap: var(--space-900);
 }
 
-.hero__logo {
-  width: clamp(180px, 20vw, 250px);
-  height: auto;
-  display: block;
-  margin-bottom: var(--space-500);
-}
-
 /* Degradado solo en el texto del titulo, la version clara de la regla:
    negro a gris medio. Es el unico lugar con degradado sobre texto. */
 .hero__titulo {
@@ -101,7 +94,6 @@
     text-align: center;
     gap: var(--space-600);
   }
-  .hero__logo { margin-inline: auto; }
   .hero__titulo,
   .hero__sub { margin-inline: auto; }
   .hero__acciones,
