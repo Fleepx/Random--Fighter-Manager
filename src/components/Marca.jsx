@@ -1,4 +1,5 @@
 import Inclina3D from "./Inclina3D";
+import ShinyText from "./ShinyText";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import logo from "../assets/imgs/LOGO-RFM.png";
 import "./Marca.css";
@@ -39,8 +40,37 @@ export default function Marca({ tamano = "nav" }) {
 
       <span className="marca__envoltorio">
         <span className="marca__nombre">
-          <span className="marca__linea1">Random Fighter</span>
-          <span className="marca__linea2">Manager</span>
+          {/* El brillo solo en la portada. En la barra y el pie el nombre
+              esta siempre a la vista, y un destello permanente ahi
+              distrae en vez de aportar; ademas cada instancia se suscribe
+              al bucle de animacion. */}
+          {tamano === "hero" ? (
+            <>
+              <ShinyText
+                className="marca__linea1"
+                text="Random Fighter"
+                color="#E9EEF4"
+                shineColor="#FFFFFF"
+                speed={3.2}
+                delay={1.6}
+                spread={100}
+              />
+              <ShinyText
+                className="marca__linea2"
+                text="Manager"
+                color="#1E90FF"
+                shineColor="#8FD0FF"
+                speed={3.2}
+                delay={1.6}
+                spread={100}
+              />
+            </>
+          ) : (
+            <>
+              <span className="marca__linea1">Random Fighter</span>
+              <span className="marca__linea2">Manager</span>
+            </>
+          )}
         </span>
       </span>
 
