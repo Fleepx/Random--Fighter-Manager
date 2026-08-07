@@ -327,7 +327,11 @@
 }
 .nav__overlay-cta:hover { color: #fff !important; filter: brightness(1.12); }
 
-@media (max-width: 860px) {
+/* Corta antes que en Fighter, a 960 y no a 860: aca la barra carga cinco
+   enlaces en vez de tres, el logotipo lleva dos palabras mas y el boton
+   dice mas texto. Con el corte de Fighter, entre los 860 y los 960 todo
+   eso quedaba apretado. */
+@media (max-width: 960px) {
   .nav__links,
   .nav__cta { display: none; }
   .nav__burger { display: block; }
