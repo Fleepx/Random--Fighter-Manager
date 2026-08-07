@@ -71,10 +71,15 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
+/* Es un enlace: sin esto hereda el subrayado y el azul por defecto del
+   navegador. No se notaba porque los spans de adentro traen su propio
+   color, pero el subrayado si aparecia bajo el nombre. */
 .nav__marca {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
 }
 /* Con la barra ancha los margenes automaticos empujan por los dos lados,
    asi los enlaces quedan centrados con la marca a la izquierda y el boton
