@@ -1,4 +1,4 @@
-import { PLAY_STORE_URL, FIGHTER_URL, PRIMER_MES_GRATIS } from "../data/site";
+import { PLAY_STORE_URL, FIGHTER_URL } from "../data/site";
 import { useReveal } from "../hooks/useReveal";
 import BotonTienda from "./BotonTienda";
 import "./FinalCta.css";
@@ -27,8 +27,6 @@ export default function FinalCta() {
             Hablar con nosotros
           </a>
         </div>
-
-        <p className="cta-final__nota">{PRIMER_MES_GRATIS}</p>
 
         <div className="tiendas cta-final__tiendas">
           <BotonTienda tienda="google" href={PLAY_STORE_URL} />

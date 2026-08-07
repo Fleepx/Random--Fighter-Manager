@@ -39,8 +39,6 @@ export default function Hero() {
 
           <p className="hero__prueba">
             <span className="hero__prueba-fuerte">{PRIMER_MES_GRATIS}</span>
-            <span className="hero__prueba-sep" aria-hidden="true" />
-            Sin permanencia mínima
           </p>
         </div>
 

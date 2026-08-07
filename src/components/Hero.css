@@ -75,13 +75,6 @@
   color: var(--texto-suave);
 }
 .hero__prueba-fuerte { color: var(--azul); }
-.hero__prueba-sep {
-  width: 4px;
-  height: 4px;
-  background: var(--azul);
-  transform: rotate(45deg);
-  flex-shrink: 0;
-}
 
 /* ─── Captura ─── */
 

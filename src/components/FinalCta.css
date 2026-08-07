@@ -49,6 +49,7 @@
 }
 
 .cta-final__acciones {
+  margin-bottom: var(--space-600);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -64,16 +65,6 @@
 .cta-final .rf-btn--secundario:hover {
   color: var(--texto);
   border-color: #fff;
-}
-
-.cta-final__nota {
-  margin: var(--space-300) 0 var(--space-600);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--azul);
 }
 
 .cta-final__cruzado {
