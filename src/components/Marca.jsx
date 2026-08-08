@@ -7,10 +7,10 @@ import "./Marca.css";
 /**
  * Simbolo mas nombre escrito.
  *
- * El bloque "Random Fighter" es identico al de la pagina roja, incluido el
- * rojo de la primera linea: es la marca madre y tiene que leerse igual en
- * los dos sitios. "Manager" se suma como tercera linea y es lo unico que
- * lleva el azul de este producto.
+ * "Random Fighter" va en una sola linea y con el mismo tratamiento que en
+ * la pagina roja: mismo cuerpo, mismo peso, misma caja. Aca va entero en
+ * claro, sin rojo: el unico color de producto de este sitio es el azul, y
+ * se reserva para "Manager", que cuelga debajo como linea propia.
  *
  * tamano: "nav" para la barra, "hero" para la portada, "pie" para el pie.
  *
@@ -44,26 +44,28 @@ export default function Marca({ tamano = "nav" }) {
               animacion. */}
           {esHero ? (
             <>
+              <span className="marca__titulo">
+                <ShinyText
+                  className="marca__palabra1"
+                  text="Random"
+                  color="#E9EEF4"
+                  shineColor="#FFFFFF"
+                  speed={3.2}
+                  delay={1.6}
+                  spread={100}
+                />{" "}
+                <ShinyText
+                  className="marca__palabra2"
+                  text="Fighter"
+                  color="#E9EEF4"
+                  shineColor="#FFFFFF"
+                  speed={3.2}
+                  delay={1.6}
+                  spread={100}
+                />
+              </span>
               <ShinyText
-                className="marca__linea1"
-                text="Random"
-                color="#C0392B"
-                shineColor="#FF7A6B"
-                speed={3.2}
-                delay={1.6}
-                spread={100}
-              />
-              <ShinyText
-                className="marca__linea2"
-                text="Fighter"
-                color="#E9EEF4"
-                shineColor="#FFFFFF"
-                speed={3.2}
-                delay={1.6}
-                spread={100}
-              />
-              <ShinyText
-                className="marca__linea3"
+                className="marca__producto"
                 text="Manager"
                 color="#1E90FF"
                 shineColor="#8FD0FF"
@@ -74,16 +76,18 @@ export default function Marca({ tamano = "nav" }) {
             </>
           ) : (
             <>
-              <span className="marca__linea1">Random</span>
-              <span className="marca__linea2">Fighter</span>
-              <span className="marca__linea3">Manager</span>
+              <span className="marca__titulo">
+                <span className="marca__palabra1">Random</span>{" "}
+                <span className="marca__palabra2">Fighter</span>
+              </span>
+              <span className="marca__producto">Manager</span>
             </>
           )}
         </span>
       </span>
 
-      {/* El nombre accesible va aparte: el bloque visual lo parte en lineas
-          y un lector de pantalla no debe leerlo entrecortado. */}
+      {/* El nombre accesible va aparte: el visual son spans sueltos y un
+          lector de pantalla no debe leerlo entrecortado. */}
       <span className="marca__sr">Random Fighter Manager</span>
     </span>
   );
