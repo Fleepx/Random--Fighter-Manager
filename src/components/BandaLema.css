@@ -1,5 +1,5 @@
 /* ─── Banda del lema ─── */
-/* Franja roja que corta la pagina, igual que la pincelada del pie de las
+/* Franja azul que corta la pagina, igual que la pincelada del pie de las
    piezas de marketing. Sirve de respiro entre dos secciones densas. */
 
 .banda {
@@ -7,6 +7,18 @@
   padding: var(--space-500) var(--space-400);
   background: var(--azul);
   overflow: hidden;
+}
+
+/* Las particulas van en su propia capa, encima del azul y debajo del
+   lema. z-index 0 con el texto en 1: sin esto el canvas tapaba el texto.
+   Los bordes rasgados van en ::before y ::after de .banda, que quedan por
+   encima de esta capa y siguen recortando bien. */
+.banda__particulas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
 }
 
 /* Bordes irregulares arriba y abajo: la franja no es un rectangulo limpio
@@ -17,6 +29,7 @@
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 2;
   height: 14px;
   background: var(--bg);
 }
