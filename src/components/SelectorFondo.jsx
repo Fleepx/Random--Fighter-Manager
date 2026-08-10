@@ -9,6 +9,7 @@ export const FONDOS = [
   { id: "prismatic", numero: "1", nombre: "Prismatic Burst" },
   { id: "ether", numero: "6", nombre: "Liquid Ether", nota: "+three" },
   { id: "molten", numero: "8", nombre: "Molten Metal" },
+  { id: "scanner", numero: "9", nombre: "Scanner" },
 ];
 
 export default function SelectorFondo({ valor, alCambiar }) {

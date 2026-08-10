@@ -1,6 +1,7 @@
 import PrismaticBurst from "./PrismaticBurst";
 import LiquidEther from "./LiquidEther";
 import MoltenMetal from "./MoltenMetal";
+import Scanner from "./Scanner";
 import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import "./BandaLema.css";
@@ -80,6 +81,46 @@ function Fondo({ efecto, conPuntero }) {
           mouseInteraction={conPuntero}
           mouseStrength={0.3}
           opacity={1}
+        />
+      );
+
+    case "scanner":
+      return (
+        <Scanner
+          color1={AZUL_HONDO}
+          color2={AZUL}
+          color3={CLARO}
+          speed={0.4}
+          sweepSpeed={0.2}
+          sweepWidth={1.6}
+          sweepFalloff={6}
+          /* Horizontal y no vertical: el barrido vertical apila lineas a lo
+             largo del alto, y aca sobran 138px. Cruzando a lo ancho entran
+             todas y el recorrido se lee. */
+          scanDirection="horizontal"
+          scale={1.2}
+          frequency={2}
+          ripple={0.22}
+          bandDensity={9}
+          lineSharpness={5.5}
+          glow={0.22}
+          colorSpread={0.7}
+          brightness={1}
+          contrast={1.15}
+          softness={1.4}
+          /* La viñeta se mide con length(uv0), normalizado contra el ALTO.
+             En una franja de 9:1 ese largo pasa de 8 en los extremos, muy
+             por encima del tope de 1.65 del smoothstep, asi que el 0.45 del
+             ejemplo apagaba todo menos la parte del medio. En 0 porque la
+             banda ya tiene sus propios bordes rasgados. */
+          vignette={0}
+          scanline
+          grain
+          grainIntensity={0.03}
+          opacity={1}
+          mouseInteraction={conPuntero}
+          mouseRadius={0.5}
+          mouseStrength={0.5}
         />
       );
 
