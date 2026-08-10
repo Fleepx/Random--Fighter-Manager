@@ -1,14 +1,13 @@
 /* ─── Selector de fondo ─── */
 /* TEMPORAL: andamio de comparacion. Sale entero al decidir el fondo.
-   Va anclado dentro de la banda, contra el borde izquierdo y a media
-   altura, para tener el control junto a lo que controla. El envoltorio
-   de la banda es quien lo posiciona; ver BandaLema.css. */
+   Va justo debajo de la banda y en reposo es solo el numero: lo que se
+   esta juzgando es el fondo, y el control no deberia taparlo ni competirle.
+   Quien lo posiciona es el envoltorio de la banda; ver BandaLema.css. */
 
 .selfondo {
   position: absolute;
   left: var(--space-400);
-  top: 50%;
-  transform: translateY(-50%);
+  top: calc(100% + var(--space-200));
   z-index: 5;
   font-family: 'Barlow Condensed', sans-serif;
 }
@@ -16,8 +15,7 @@
 .selfondo__boton {
   display: flex;
   align-items: center;
-  gap: var(--space-200);
-  padding: var(--space-200) var(--space-300);
+  padding: var(--space-100);
   border: 1px solid var(--borde);
   border-radius: var(--radius-md);
   background: var(--superficie);
@@ -28,29 +26,14 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
-  /* Crece un poco al acercar el puntero: encima del fondo animado un
-     borde solo no alcanza para que salte a la vista. Desde la izquierda,
-     para que no se corra respecto del sitio donde estaba. */
-  transform-origin: left center;
-  transition: transform var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
-.selfondo__boton:hover {
-  border-color: var(--azul);
-  transform: scale(1.08);
-}
+.selfondo__boton:hover { border-color: var(--azul); }
 .selfondo__boton:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
 
-/* Quien no quiere movimiento igual necesita ver cual esta activo: se
-   cambia el crecimiento por un realce del fondo. */
-@media (prefers-reduced-motion: reduce) {
-  .selfondo__boton { transition: border-color var(--dur-fast) var(--ease-out); }
-  .selfondo__boton:hover { transform: none; background: var(--azul-hondo); }
-}
-
-/* Cuadradito con el numero: es lo que se busca de reojo, asi que carga el
-   color de marca y el resto queda en gris. */
+/* Cuadradito con el numero: en reposo es todo el boton, asi que carga el
+   color de marca. */
 .selfondo__numero {
   display: grid;
   place-items: center;
@@ -64,18 +47,41 @@
   font-weight: 700;
 }
 
-.selfondo__texto { white-space: nowrap; }
-
-.selfondo__flecha {
-  width: 0;
-  height: 0;
-  margin-left: var(--space-100);
-  border-left: 5px solid var(--texto-suave);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  transition: transform var(--dur-fast) var(--ease-out);
+/* El nombre se despliega al acercar el puntero. La grilla de 0fr a 1fr deja
+   que el ancho lo calcule el navegador con el texto real; con un max-width
+   a ojo se termina recortando la ultima letra. */
+.selfondo__envoltorio {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns var(--dur-base) var(--ease-out);
 }
-.selfondo__boton[aria-expanded="true"] .selfondo__flecha { transform: rotate(90deg); }
+.selfondo__boton:hover .selfondo__envoltorio,
+.selfondo__boton:focus-visible .selfondo__envoltorio,
+.selfondo__boton[aria-expanded="true"] .selfondo__envoltorio {
+  grid-template-columns: 1fr;
+}
+
+.selfondo__texto {
+  overflow: hidden;
+  white-space: nowrap;
+  /* El aire va en el texto y no en el boton: como padding dejaria un hueco
+     a la derecha del numero con el nombre plegado. */
+  padding: 0;
+  transition: padding var(--dur-base) var(--ease-out);
+}
+.selfondo__boton:hover .selfondo__texto,
+.selfondo__boton:focus-visible .selfondo__texto,
+.selfondo__boton[aria-expanded="true"] .selfondo__texto {
+  padding-left: var(--space-200);
+  padding-right: var(--space-150);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selfondo__envoltorio,
+  .selfondo__texto { transition: none; }
+}
+
+/* ─── Lista ─── */
 
 .selfondo__lista {
   position: absolute;
@@ -84,7 +90,6 @@
   margin: 0;
   padding: var(--space-100);
   list-style: none;
-  min-width: 100%;
   border: 1px solid var(--borde);
   border-radius: var(--radius-md);
   background: var(--superficie);
@@ -107,6 +112,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: left;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out);
@@ -114,6 +120,10 @@
 .selfondo__opcion:hover { background: rgba(255, 255, 255, 0.06); color: var(--texto); }
 .selfondo__opcion:focus-visible { outline: 2px solid var(--azul); outline-offset: -2px; }
 .selfondo__opcion[aria-selected="true"] { color: var(--texto); }
+
+/* Dentro de la lista el nombre va siempre visible: aca no hay nada que
+   plegar, se estan comparando las tres opciones. */
+.selfondo__opcion .selfondo__texto { padding: 0; }
 
 /* Los no elegidos llevan el numero apagado: el azul marca cual esta puesto. */
 .selfondo__opcion[aria-selected="false"] .selfondo__numero {
@@ -133,9 +143,8 @@
   color: var(--azul);
 }
 
-/* En pantallas angostas el boton entero no cabe junto al lema: queda solo
-   el numero, que es lo que de verdad se lee de reojo. */
+/* Sin puntero fino no hay hover que despliegue el nombre: el boton queda en
+   el numero y los nombres se leen en la lista. */
 @media (max-width: 720px) {
   .selfondo { left: var(--space-300); }
-  .selfondo__boton .selfondo__texto { display: none; }
 }

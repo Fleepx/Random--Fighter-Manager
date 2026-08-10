@@ -51,8 +51,13 @@ export default function SelectorFondo({ valor, alCambiar }) {
         onClick={() => setAbierto((v) => !v)}
       >
         <span className="selfondo__numero">{actual.numero}</span>
-        <span className="selfondo__texto">{actual.nombre}</span>
-        <span className="selfondo__flecha" aria-hidden="true" />
+        {/* El nombre se despliega al acercar el puntero. El envoltorio es
+            una grilla que va de 0fr a 1fr: asi la animacion la calcula el
+            navegador con el ancho real del texto, sin numeros inventados
+            que despues recortan la ultima letra. */}
+        <span className="selfondo__envoltorio">
+          <span className="selfondo__texto">{actual.nombre}</span>
+        </span>
       </button>
 
       {abierto && (
