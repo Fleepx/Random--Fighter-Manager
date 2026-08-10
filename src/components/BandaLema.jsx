@@ -1,4 +1,4 @@
-import Particles from "./Particles";
+import PrismaticBurst from "./PrismaticBurst";
 import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import "./BandaLema.css";
@@ -11,22 +11,21 @@ export default function BandaLema() {
 
   return (
     <div className="banda rf-reveal" ref={ref}>
-      {/* Particulas sobre el azul. Van con aria-hidden y detras del lema:
-          son ambiente, no contenido.
-          El seguimiento del cursor se apaga sin puntero fino, donde no
-          aporta nada y el bucle de render igual seguiria corriendo. */}
-      <div className="banda__particulas" aria-hidden="true">
-        <Particles
-          particleColors={["#ffffff", "#BBDDFF"]}
-          particleCount={160}
-          particleSpread={12}
-          speed={0.08}
-          particleBaseSize={90}
-          sizeRandomness={1}
-          alphaParticles
-          moveParticlesOnHover={conPuntero}
-          particleHoverFactor={0.8}
-          disableRotation={false}
+      {/* Rafaga prismatica sobre el azul. Va con aria-hidden y detras del
+          lema: es ambiente, no contenido.
+          Los colores salen de la paleta del sitio, no del ejemplo de la
+          documentacion: azul de marca, azul oscuro y el claro del texto.
+          Sin eso entraba rosa y violeta, que no existen en esta pagina. */}
+      <div className="banda__fondo" aria-hidden="true">
+        <PrismaticBurst
+          animationType="rotate3d"
+          intensity={1.6}
+          speed={0.35}
+          distort={0.8}
+          rayCount={20}
+          mixBlendMode="lighten"
+          hoverDampness={conPuntero ? 0.25 : 0}
+          colors={["#1E90FF", "#0268C2", "#E9EEF4"]}
         />
       </div>
 

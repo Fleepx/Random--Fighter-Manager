@@ -13,12 +13,12 @@
    lema. z-index 0 con el texto en 1: sin esto el canvas tapaba el texto.
    Los bordes rasgados van en ::before y ::after de .banda, que quedan por
    encima de esta capa y siguen recortando bien. */
-.banda__particulas {
+.banda__fondo {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.55;
+  opacity: 0.7;
 }
 
 /* Bordes irregulares arriba y abajo: la franja no es un rectangulo limpio
