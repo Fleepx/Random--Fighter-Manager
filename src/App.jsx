@@ -27,16 +27,12 @@ export default function App() {
       <main id="contenido">
         <Hero />
         <Problem />
-        {/* TEMPORAL: ocho copias de la banda para comparar fondos de un
+        {/* TEMPORAL: las candidatas que siguen en pie para comparar fondos de un
             vistazo. Al elegir uno queda una sola, sin etiqueta. */}
-        <BandaLema key="r1-prismatic" efecto="prismatic" etiqueta="1 · Prismatic Burst" />
-        <BandaLema key="r1-particles" efecto="particles" etiqueta="2 · Particles" />
-        <BandaLema key="r1-blinds" efecto="blinds" etiqueta="3 · Gradient Blinds" />
-        <BandaLema key="r1-plasma" efecto="plasma" etiqueta="4 · Plasma Wave" />
-        <BandaLema key="r1-aurora" efecto="aurora" etiqueta="5 · Soft Aurora" />
-        <BandaLema key="r1-ether" efecto="ether" etiqueta="6 · Liquid Ether" />
-        <BandaLema key="r1-ferro" efecto="ferro" etiqueta="7 · Ferrofluid" />
-        <BandaLema key="r1-molten" efecto="molten" etiqueta="8 · Molten Metal" />
+        <BandaLema key="r2-prismatic" efecto="prismatic" etiqueta="1 · Prismatic Burst" />
+        <BandaLema key="r2-ether" efecto="ether" etiqueta="6 · Liquid Ether" />
+        <BandaLema key="r2-ferro" efecto="ferro" etiqueta="7 · Ferrofluid" />
+        <BandaLema key="r2-molten" efecto="molten" etiqueta="8 · Molten Metal" />
         <TaglineReveal />
         <Benefits />
         <HowItWorks />

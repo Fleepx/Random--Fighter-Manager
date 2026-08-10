@@ -1,8 +1,4 @@
 import PrismaticBurst from "./PrismaticBurst";
-import Particles from "./Particles";
-import GradientBlinds from "./GradientBlinds";
-import PlasmaWave from "./PlasmaWave";
-import SoftAurora from "./SoftAurora";
 import LiquidEther from "./LiquidEther";
 import Ferrofluid from "./Ferrofluid";
 import MoltenMetal from "./MoltenMetal";
@@ -40,74 +36,6 @@ function Fondo({ efecto, conPuntero }) {
           mixBlendMode="lighten"
           hoverDampness={conPuntero ? 0.25 : 0}
           colors={[AZUL, AZUL_OSCURO, CLARO]}
-        />
-      );
-
-    case "particles":
-      return (
-        <Particles
-          particleColors={["#ffffff", AZUL_CLARO]}
-          particleCount={160}
-          particleSpread={12}
-          speed={0.08}
-          particleBaseSize={90}
-          sizeRandomness={1}
-          alphaParticles
-          moveParticlesOnHover={conPuntero}
-          particleHoverFactor={0.8}
-          disableRotation={false}
-        />
-      );
-
-    case "blinds":
-      return (
-        <GradientBlinds
-          gradientColors={[AZUL_CLARO, AZUL_HONDO]}
-          angle={20}
-          noise={0.12}
-          blindCount={14}
-          blindMinWidth={48}
-          spotlightRadius={0.6}
-          spotlightSoftness={1.2}
-          spotlightOpacity={0.9}
-          mouseDampening={conPuntero ? 0.15 : 0}
-          distortAmount={0}
-          shineDirection="left"
-          mixBlendMode="lighten"
-        />
-      );
-
-    case "plasma":
-      return (
-        <PlasmaWave
-          colors={[AZUL, AZUL_CLARO]}
-          speed1={0.05}
-          speed2={0.05}
-          focalLength={0.55}
-          bend1={1}
-          bend2={0.5}
-          dir2={-1}
-          rotationDeg={0}
-        />
-      );
-
-    case "aurora":
-      return (
-        <SoftAurora
-          speed={0.45}
-          scale={1.1}
-          brightness={1.1}
-          color1={CLARO}
-          color2={AZUL}
-          noiseFrequency={2.2}
-          noiseAmplitude={1}
-          bandHeight={0.5}
-          bandSpread={1.2}
-          octaveDecay={0.1}
-          layerOffset={0.4}
-          colorSpeed={0.8}
-          enableMouseInteraction={conPuntero}
-          mouseInfluence={0.2}
         />
       );
 
