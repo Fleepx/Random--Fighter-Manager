@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 import EfectosSvg from "./components/EfectosSvg";
 import Atmosfera from "./components/Atmosfera";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Problem from "./components/Problem";
 import BandaLema from "./components/BandaLema";
+import SelectorFondo, { FONDOS } from "./components/SelectorFondo";
 import TaglineReveal from "./components/TaglineReveal";
 import Benefits from "./components/Benefits";
 import HowItWorks from "./components/HowItWorks";
@@ -14,6 +17,9 @@ import FinalCta from "./components/FinalCta";
 import Footer from "./components/Footer";
 
 export default function App() {
+  // TEMPORAL: cual fondo lleva la banda. Sale junto con el selector.
+  const [fondo, setFondo] = useState(FONDOS[0].id);
+
   return (
     <>
       <a href="#contenido" className="rf-skip-link">
@@ -27,11 +33,15 @@ export default function App() {
       <main id="contenido">
         <Hero />
         <Problem />
-        {/* TEMPORAL: las candidatas que siguen en pie para comparar fondos de un
-            vistazo. Al elegir uno queda una sola, sin etiqueta. */}
-        <BandaLema key="r3-prismatic" efecto="prismatic" etiqueta="1 · Prismatic Burst" />
-        <BandaLema key="r3-ether" efecto="ether" etiqueta="6 · Liquid Ether" />
-        <BandaLema key="r3-molten" efecto="molten" etiqueta="8 · Molten Metal" />
+        {/* TEMPORAL: una sola banda, con el fondo que diga el selector. La
+            key lo fuerza a desmontar: cada fondo trae su propio contexto
+            WebGL y hay que soltar el anterior, no superponerlo.
+            El envoltorio existe porque la banda recorta lo que se sale, y
+            el desplegable del selector se abre por debajo del borde. */}
+        <div className="banda-envoltorio">
+          <BandaLema key={fondo} efecto={fondo} />
+          <SelectorFondo valor={fondo} alCambiar={setFondo} />
+        </div>
         <TaglineReveal />
         <Benefits />
         <HowItWorks />
@@ -44,6 +54,7 @@ export default function App() {
       </main>
 
       <Footer />
+
     </>
   );
 }

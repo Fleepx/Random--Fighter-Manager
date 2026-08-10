@@ -1,0 +1,141 @@
+/* ─── Selector de fondo ─── */
+/* TEMPORAL: andamio de comparacion. Sale entero al decidir el fondo.
+   Va anclado dentro de la banda, contra el borde izquierdo y a media
+   altura, para tener el control junto a lo que controla. El envoltorio
+   de la banda es quien lo posiciona; ver BandaLema.css. */
+
+.selfondo {
+  position: absolute;
+  left: var(--space-400);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.selfondo__boton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+  padding: var(--space-200) var(--space-300);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-md);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  /* Crece un poco al acercar el puntero: encima del fondo animado un
+     borde solo no alcanza para que salte a la vista. Desde la izquierda,
+     para que no se corra respecto del sitio donde estaba. */
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.selfondo__boton:hover {
+  border-color: var(--azul);
+  transform: scale(1.08);
+}
+.selfondo__boton:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+
+/* Quien no quiere movimiento igual necesita ver cual esta activo: se
+   cambia el crecimiento por un realce del fondo. */
+@media (prefers-reduced-motion: reduce) {
+  .selfondo__boton { transition: border-color var(--dur-fast) var(--ease-out); }
+  .selfondo__boton:hover { transform: none; background: var(--azul-hondo); }
+}
+
+/* Cuadradito con el numero: es lo que se busca de reojo, asi que carga el
+   color de marca y el resto queda en gris. */
+.selfondo__numero {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--azul);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.selfondo__texto { white-space: nowrap; }
+
+.selfondo__flecha {
+  width: 0;
+  height: 0;
+  margin-left: var(--space-100);
+  border-left: 5px solid var(--texto-suave);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.selfondo__boton[aria-expanded="true"] .selfondo__flecha { transform: rotate(90deg); }
+
+.selfondo__lista {
+  position: absolute;
+  left: 0;
+  top: calc(100% + var(--space-100));
+  margin: 0;
+  padding: var(--space-100);
+  list-style: none;
+  min-width: 100%;
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-md);
+  background: var(--superficie);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+}
+
+.selfondo__opcion {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+  width: 100%;
+  padding: var(--space-150) var(--space-200);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.selfondo__opcion:hover { background: rgba(255, 255, 255, 0.06); color: var(--texto); }
+.selfondo__opcion:focus-visible { outline: 2px solid var(--azul); outline-offset: -2px; }
+.selfondo__opcion[aria-selected="true"] { color: var(--texto); }
+
+/* Los no elegidos llevan el numero apagado: el azul marca cual esta puesto. */
+.selfondo__opcion[aria-selected="false"] .selfondo__numero {
+  background: var(--borde);
+  color: var(--texto-suave);
+}
+
+/* Liquid Ether arrastra three, unos 130 KB gzip que los otros dos no
+   piden. Es parte de la decision, asi que va a la vista. */
+.selfondo__nota {
+  margin-left: auto;
+  padding-left: var(--space-200);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--azul);
+}
+
+/* En pantallas angostas el boton entero no cabe junto al lema: queda solo
+   el numero, que es lo que de verdad se lee de reojo. */
+@media (max-width: 720px) {
+  .selfondo { left: var(--space-300); }
+  .selfondo__boton .selfondo__texto { display: none; }
+}

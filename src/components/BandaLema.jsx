@@ -89,11 +89,10 @@ function Fondo({ efecto, conPuntero }) {
 }
 
 /**
- * efecto: cual fondo va detras del lema. Sin valor no lleva fondo.
- * etiqueta: rotulo de prueba. Existe solo mientras comparamos candidatos;
- *   sale junto con los fondos descartados.
+ * efecto: cual fondo va detras del lema. Sin valor no lleva fondo. Es
+ *   temporal, mientras se compara: al decidir queda uno fijo y la prop sale.
  */
-export default function BandaLema({ efecto, etiqueta }) {
+export default function BandaLema({ efecto }) {
   const ref = useReveal({ threshold: 0.3 });
   const conPuntero = usePunteroFino();
 
@@ -106,8 +105,6 @@ export default function BandaLema({ efecto, etiqueta }) {
           <Fondo efecto={efecto} conPuntero={conPuntero} />
         </div>
       )}
-
-      {etiqueta && <span className="banda__etiqueta">{etiqueta}</span>}
 
       <p className="banda__lema">
         {LEMA.map((palabra, i) => (

@@ -2,6 +2,13 @@
 /* Franja azul que corta la pagina, igual que la pincelada del pie de las
    piezas de marketing. Sirve de respiro entre dos secciones densas. */
 
+/* TEMPORAL: ancla del selector de fondo. La banda recorta lo que se sale,
+   asi que el control vive un nivel mas afuera. Sale con el andamio. */
+.banda-envoltorio {
+  position: relative;
+  z-index: 5;
+}
+
 .banda {
   position: relative;
   padding: var(--space-500) var(--space-400);
@@ -19,24 +26,6 @@
   z-index: 0;
   pointer-events: none;
   opacity: 0.7;
-}
-
-/* Rotulo de prueba, temporal: identifica que fondo se esta viendo mientras
-   comparamos candidatos. Sale junto con los descartados. */
-.banda__etiqueta {
-  position: absolute;
-  top: 18px;
-  left: 16px;
-  z-index: 3;
-  padding: 2px 8px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.72);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #fff;
 }
 
 /* Bordes irregulares arriba y abajo: la franja no es un rectangulo limpio
