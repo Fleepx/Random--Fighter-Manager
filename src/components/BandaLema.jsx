@@ -94,14 +94,19 @@ function Fondo({ efecto, conPuntero }) {
           sweepSpeed={0.2}
           sweepWidth={1.6}
           sweepFalloff={6}
-          /* Horizontal y no vertical: el barrido vertical apila lineas a lo
-             largo del alto, y aca sobran 138px. Cruzando a lo ancho entran
-             todas y el recorrido se lee. */
-          scanDirection="horizontal"
+          /* "vertical" nombra el eje del BARRIDO, no la orientacion de las
+             lineas: pone axis = p.y, las bandas varian a lo alto y salen
+             acostadas, recorriendo la franja de arriba abajo. "horizontal"
+             hace lo contrario y deja lineas paradas, que es lo que no
+             queriamos. El nombre de la prop invita al error. */
+          scanDirection="vertical"
           scale={1.2}
           frequency={2}
           ripple={0.22}
-          bandDensity={9}
+          /* Contra el alto, no contra el ancho: p.y va de -0.83 a 0.83, asi
+             que la densidad se reparte en 138px. Con 9 salian bandas de 9px
+             que titilaban; 4 las deja en unos 21px. */
+          bandDensity={4}
           lineSharpness={5.5}
           glow={0.22}
           colorSpread={0.7}
