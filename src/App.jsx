@@ -29,10 +29,9 @@ export default function App() {
         <Problem />
         {/* TEMPORAL: las candidatas que siguen en pie para comparar fondos de un
             vistazo. Al elegir uno queda una sola, sin etiqueta. */}
-        <BandaLema key="r2-prismatic" efecto="prismatic" etiqueta="1 · Prismatic Burst" />
-        <BandaLema key="r2-ether" efecto="ether" etiqueta="6 · Liquid Ether" />
-        <BandaLema key="r2-ferro" efecto="ferro" etiqueta="7 · Ferrofluid" />
-        <BandaLema key="r2-molten" efecto="molten" etiqueta="8 · Molten Metal" />
+        <BandaLema key="r3-prismatic" efecto="prismatic" etiqueta="1 · Prismatic Burst" />
+        <BandaLema key="r3-ether" efecto="ether" etiqueta="6 · Liquid Ether" />
+        <BandaLema key="r3-molten" efecto="molten" etiqueta="8 · Molten Metal" />
         <TaglineReveal />
         <Benefits />
         <HowItWorks />

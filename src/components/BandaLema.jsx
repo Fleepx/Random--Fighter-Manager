@@ -1,6 +1,5 @@
 import PrismaticBurst from "./PrismaticBurst";
 import LiquidEther from "./LiquidEther";
-import Ferrofluid from "./Ferrofluid";
 import MoltenMetal from "./MoltenMetal";
 import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
@@ -57,27 +56,6 @@ function Fondo({ efecto, conPuntero }) {
           takeoverDuration={0.25}
           autoResumeDelay={3000}
           autoRampDuration={0.6}
-        />
-      );
-
-    case "ferro":
-      return (
-        <Ferrofluid
-          colors={[AZUL_CLARO, AZUL, CLARO]}
-          speed={0.4}
-          scale={0.7}
-          turbulence={1}
-          fluidity={0.1}
-          rimWidth={0.2}
-          sharpness={3}
-          shimmer={1}
-          glow={2}
-          flowDirection="right"
-          opacity={1}
-          mouseInteraction={conPuntero}
-          mouseStrength={1}
-          mouseRadius={0.3}
-          mixBlendMode="lighten"
         />
       );
 
