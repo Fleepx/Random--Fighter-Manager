@@ -23,6 +23,7 @@ export const FONDOS = [
   { id: "beams", numero: "14", nombre: "Beams", nota: "opaco · +drei" },
   { id: "galaxia", numero: "15", nombre: "Galaxy" },
   { id: "cromo", numero: "16", nombre: "Liquid Chrome", nota: "opaco" },
+  { id: "tunel", numero: "17", nombre: "Light Tunnel" },
 ];
 
 export default function SelectorFondo({ valor, alCambiar }) {

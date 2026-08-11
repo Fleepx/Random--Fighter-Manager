@@ -10,6 +10,7 @@ import Grainient from "./Grainient";
 import Beams from "./Beams";
 import Galaxy from "./Galaxy";
 import LiquidChrome from "./LiquidChrome";
+import LightTunnel from "./LightTunnel";
 import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import "./BandaLema.css";
@@ -275,6 +276,45 @@ function Fondo({ efecto, conPuntero }) {
           frequencyX={3}
           frequencyY={3}
           interactive={conPuntero}
+        />
+      );
+
+    case "tunel":
+      return (
+        <LightTunnel
+          cableColor={AZUL_CLARO}
+          pulseColor={CLARO}
+          tunnelColor={AZUL_HONDO}
+          tunnelOpacity={0}
+          speed={0.1}
+          flowDirection="outward"
+          pulseSpeed={1.6}
+          pulseLength={0.28}
+          pulseBlend={1}
+          pulseWidth={1}
+          cableCount={20}
+          thickness={0.35}
+          rimWidth={0.15}
+          waviness={0.3}
+          sway={0.5}
+          size={1}
+          centerX={0}
+          centerY={0}
+          glow={1}
+          /* El desvanecido se mide con un radio normalizado contra el LADO
+             CORTO. En una franja de 9.2:1 el radio llega a 2.3 en los
+             extremos, asi que el fadeFar 2 del ejemplo apagaba las dos
+             puntas y dejaba un circulo al medio. Y su fadeNear 0.5 abria un
+             agujero de 138px justo en el centro, el alto entero. */
+          fadeNear={0.12}
+          fadeFar={3.4}
+          brightness={1}
+          colorVariance
+          grain
+          grainIntensity={0.03}
+          opacity={1}
+          mouseInteraction={conPuntero}
+          mouseStrength={0.1}
         />
       );
 
