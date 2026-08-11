@@ -3,7 +3,6 @@ import {
   PERIODOS,
   PLANES,
   PRIMER_MES_GRATIS,
-  SEDES_ADICIONALES,
   calcularAhorro,
   formatearPrecio,
 } from "../data/site";
@@ -22,6 +21,7 @@ function Plan({ plan, periodo, indice }) {
   const ref = useReveal({ delay: indice * 90 });
   const monto = formatearPrecio(plan.precios[periodo]);
   const ahorro = calcularAhorro(plan.precios, periodo);
+  const montoSede = formatearPrecio(plan.precioSede[periodo]);
 
   return (
     <article
@@ -51,6 +51,24 @@ function Plan({ plan, periodo, indice }) {
         {ahorro ? `Ahorras ${ahorro}% frente al mensual` : " "}
       </p>
 
+      {/* El precio de la sede extra vive en la tarjeta de su nivel y no en
+          un bloque aparte al pie. Abajo quedaba lejos del selector de
+          periodo: se cambiaba de periodo arriba sin ver que esas cifras
+          tambien se movian, o se leian sin saber a que periodo eran. */}
+      <p className="plan__sede">
+        <span className="plan__sede-etiqueta">Sede adicional</span>
+        {/* Sin precio va con la misma estructura que con precio, cifra
+            grande arriba y aclaracion chica abajo, para que las dos midan
+            igual solas. Con marcado distinto la fila cambiaba de alto al
+            pasar de mensual a semestral y la tarjeta daba un salto. */}
+        <span className="plan__sede-monto">
+          {montoSede ? `+ ${montoSede}` : "—"}
+          <span className="plan__sede-periodo">
+            {montoSede ? SUFIJO[periodo] : "Solo semestral o anual"}
+          </span>
+        </span>
+      </p>
+
       <ul className="plan__incluye">
         {plan.incluye.map((linea) => (
           <li key={linea}>
@@ -69,43 +87,6 @@ function Plan({ plan, periodo, indice }) {
         {plan.cta}
       </a>
     </article>
-  );
-}
-
-/* Las sedes extra no son un cuarto plan sino un agregado sobre el
-   contratado, asi que van en una tabla y no en una tarjeta: compiten por
-   atencion con la decision principal y no deberian ganarla. */
-function Sedes({ periodo }) {
-  const ref = useReveal();
-
-  return (
-    <div className="sedes rf-reveal" ref={ref}>
-      <h3 className="sedes__titulo">¿Tienes más de una sede?</h3>
-      <p className="sedes__bajada">
-        Cada sede adicional se suma a tu plan como una suscripción aparte,
-        al mismo nivel que contrataste.
-      </p>
-
-      <ul className="sedes__lista">
-        {SEDES_ADICIONALES.map((sede) => {
-          const monto = formatearPrecio(sede.precios[periodo]);
-          return (
-            <li key={sede.id} className="sede">
-              <span className="sede__nombre">{sede.nombre}</span>
-              {monto ? (
-                <span className="sede__precio">
-                  {monto} <span className="sede__periodo">{SUFIJO[periodo]}</span>
-                </span>
-              ) : (
-                /* Pro no se vende por mes en sedes extra. Antes que inventar
-                   una cifra o dejar el hueco, la fila lo dice. */
-                <span className="sede__sin-precio">Solo semestral o anual</span>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
   );
 }
 
@@ -149,7 +130,10 @@ export default function Planes() {
           ))}
         </div>
 
-        <Sedes periodo={periodo} />
+        <p className="planes__sedes-nota">
+          Cada sede adicional se suma a tu plan como una suscripción aparte,
+          al mismo nivel que contrataste.
+        </p>
 
         <p className="planes__pie">
           Precios en pesos chilenos, IVA incluido. ¿Necesitas algo distinto?{" "}

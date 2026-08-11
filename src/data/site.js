@@ -118,6 +118,7 @@ export const PLANES = [
     descripcion:
       "Para academias que están comenzando y quieren ordenar su gestión.",
     precios: { mensual: 47990, semestral: 244990, anual: 459990 },
+    precioSede: { mensual: 40900, semestral: 214990, anual: 394990 },
     incluye: [
       "Hasta 120 alumnos",
       "Hasta 2 instructores",
@@ -134,6 +135,7 @@ export const PLANES = [
     descripcion:
       "Para academias en crecimiento, con más sedes e instructores.",
     precios: { mensual: 83990, semestral: 424990, anual: 799990 },
+    precioSede: { mensual: 72990, semestral: 369990, anual: 679990 },
     incluye: [
       "Todo lo del plan Plus",
       "Hasta 250 alumnos",
@@ -150,6 +152,9 @@ export const PLANES = [
     nombre: "Pro",
     descripcion: "Para academias consolidadas que necesitan todo el control.",
     precios: { mensual: 147990, semestral: 709990, anual: 1199990 },
+    /* Sin tarifa mensual para sedes extra en este nivel: solo semestral
+       o anual. La tarjeta lo dice en vez de dejar el hueco. */
+    precioSede: { mensual: null, semestral: 609990, anual: 959990 },
     incluye: [
       "Hasta 1.000 alumnos",
       "Hasta 10 instructores",
@@ -161,14 +166,6 @@ export const PLANES = [
     cta: "Hablar con ventas",
     destacado: false,
   },
-];
-
-/* Suscripcion aparte por cada sede extra, sobre el plan contratado.
-   El nivel Pro no tiene tarifa mensual: solo semestral o anual. */
-export const SEDES_ADICIONALES = [
-  { id: "plus", nombre: "Plus", precios: { mensual: 40900, semestral: 214990, anual: 394990 } },
-  { id: "blue", nombre: "Blue", precios: { mensual: 72990, semestral: 369990, anual: 679990 } },
-  { id: "pro",  nombre: "Pro",  precios: { mensual: null,  semestral: 609990, anual: 959990 } },
 ];
 
 export const PREGUNTAS = [
