@@ -283,7 +283,14 @@ function Fondo({ efecto, conPuntero }) {
       return (
         <LightTunnel
           cableColor={AZUL_CLARO}
-          pulseColor={CLARO}
+          /* El shader multiplica el pulso por 3 antes de pintarlo, y ahi se
+             satura lo que se le ponga: desde el claro sale blanco, y desde
+             el azul oscuro el verde y el azul llegan los dos a 1 y sale
+             cian. El unico de la paleta que aguanta esa ganancia y sigue
+             leyendose azul es el hondo, que queda en rgb(0.12, 0.44, 0.75).
+             Para que se vea mas oscuro hay que bajar el color, no el
+             brillo: la ganancia esta dentro del shader. */
+          pulseColor={AZUL_HONDO}
           tunnelColor={AZUL_HONDO}
           tunnelOpacity={0}
           speed={0.1}
