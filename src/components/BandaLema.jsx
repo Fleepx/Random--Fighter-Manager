@@ -282,15 +282,15 @@ function Fondo({ efecto, conPuntero }) {
     case "tunel":
       return (
         <LightTunnel
-          cableColor={AZUL_CLARO}
-          /* El shader multiplica el pulso por 3 antes de pintarlo, y ahi se
-             satura lo que se le ponga: desde el claro sale blanco, y desde
-             el azul oscuro el verde y el azul llegan los dos a 1 y sale
-             cian. El unico de la paleta que aguanta esa ganancia y sigue
-             leyendose azul es el hondo, que queda en rgb(0.12, 0.44, 0.75).
-             Para que se vea mas oscuro hay que bajar el color, no el
-             brillo: la ganancia esta dentro del shader. */
-          pulseColor={AZUL_HONDO}
+          /* Invertidos respecto de como venian. Cada uno pasa por una
+             ganancia distinta dentro del shader, asi que el cambio no es
+             simetrico: el cable se multiplica por 1.3 y el pulso por 3.
+             Con el hondo en el cable queda en rgb(0.05, 0.19, 0.33), una
+             fibra oscura sobre el azul de la banda, y el claro en el pulso
+             satura hasta el blanco. Fibra apagada con la luz corriendo por
+             dentro, que es como se ve una fibra optica de verdad. */
+          cableColor={AZUL_HONDO}
+          pulseColor={AZUL_CLARO}
           tunnelColor={AZUL_HONDO}
           tunnelOpacity={0}
           speed={0.1}
