@@ -5,11 +5,24 @@ import "./SelectorFondo.css";
    quede decidido, junto con la prop "efecto" y los fondos descartados.
    Los numeros son los de la comparacion anterior, no correlativos: los tres
    ya se vienen nombrando asi. */
+/* Los numeros no son correlativos a proposito: son los de la comparacion
+   original y varios candidatos ya quedaron descartados por el camino.
+   PlasmaWave conserva su 4 de entonces aunque haya vuelto ahora.
+   "opaco" marca los que tapan el azul de la banda en lugar de sumarse;
+   con esos no se ve la franja con un efecto encima, se ve el efecto. */
 export const FONDOS = [
   { id: "prismatic", numero: "1", nombre: "Prismatic Burst" },
+  { id: "plasma", numero: "4", nombre: "Plasma Wave" },
   { id: "ether", numero: "6", nombre: "Liquid Ether", nota: "+three" },
   { id: "molten", numero: "8", nombre: "Molten Metal" },
   { id: "scanner", numero: "9", nombre: "Scanner" },
+  { id: "lineas", numero: "10", nombre: "Line Waves" },
+  { id: "silk", numero: "11", nombre: "Silk", nota: "opaco · +fiber" },
+  { id: "topo", numero: "12", nombre: "Topography" },
+  { id: "grain", numero: "13", nombre: "Grainient", nota: "opaco" },
+  { id: "beams", numero: "14", nombre: "Beams", nota: "opaco · +drei" },
+  { id: "galaxia", numero: "15", nombre: "Galaxy" },
+  { id: "cromo", numero: "16", nombre: "Liquid Chrome", nota: "opaco" },
 ];
 
 export default function SelectorFondo({ valor, alCambiar }) {

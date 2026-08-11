@@ -2,6 +2,14 @@ import PrismaticBurst from "./PrismaticBurst";
 import LiquidEther from "./LiquidEther";
 import MoltenMetal from "./MoltenMetal";
 import Scanner from "./Scanner";
+import LineWaves from "./LineWaves";
+import Silk from "./Silk";
+import Topography from "./Topography";
+import PlasmaWave from "./PlasmaWave";
+import Grainient from "./Grainient";
+import Beams from "./Beams";
+import Galaxy from "./Galaxy";
+import LiquidChrome from "./LiquidChrome";
 import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import "./BandaLema.css";
@@ -126,6 +134,147 @@ function Fondo({ efecto, conPuntero }) {
           mouseInteraction={conPuntero}
           mouseRadius={0.5}
           mouseStrength={0.5}
+        />
+      );
+
+    case "lineas":
+      return (
+        <LineWaves
+          speed={0.25}
+          innerLineCount={22}
+          outerLineCount={26}
+          warpIntensity={0.9}
+          rotation={-20}
+          edgeFadeWidth={0}
+          colorCycleSpeed={0.7}
+          brightness={0.28}
+          color1={CLARO}
+          color2={AZUL_CLARO}
+          color3={AZUL}
+          enableMouseInteraction={conPuntero}
+          mouseInfluence={1.4}
+        />
+      );
+
+    /* OPACO: tapa el azul de la banda en vez de sumarse. Se ve el efecto
+       entero, no la franja con el efecto encima. */
+    case "silk":
+      return <Silk speed={4} scale={1.6} color={AZUL_OSCURO} noiseIntensity={1.2} rotation={0.3} />;
+
+    case "topo":
+      return (
+        <Topography
+          lowColor={AZUL_HONDO}
+          midColor={AZUL}
+          highColor={CLARO}
+          speed={0.3}
+          morphAmount={2.4}
+          morphSpeed={0.05}
+          bands={2}
+          thickness={0.012}
+          scale={1}
+          pixelSize={1}
+          glow={0.4}
+          colorMode="elevation"
+          contrast={3}
+          brightness={1}
+          fillBands={false}
+          opacity={1}
+          grain
+          grainIntensity={0.03}
+          mouseInteraction={conPuntero}
+          mouseRadius={0.3}
+          mouseStrength={0.4}
+        />
+      );
+
+    case "plasma":
+      return (
+        <PlasmaWave
+          colors={[AZUL, AZUL_CLARO]}
+          speed1={0.05}
+          speed2={0.05}
+          focalLength={0.55}
+          bend1={1}
+          bend2={0.5}
+          dir2={-1}
+          rotationDeg={0}
+        />
+      );
+
+    /* OPACO, igual que Silk. */
+    case "grain":
+      return (
+        <Grainient
+          color1={AZUL_CLARO}
+          color2={AZUL_OSCURO}
+          color3={AZUL_HONDO}
+          timeSpeed={0.2}
+          colorBalance={0}
+          warpStrength={1}
+          warpFrequency={5}
+          warpSpeed={1.4}
+          warpAmplitude={50}
+          blendAngle={0}
+          blendSoftness={0.05}
+          rotationAmount={220}
+          noiseScale={2}
+          grainAmount={0.08}
+          grainScale={2}
+          grainAnimated={false}
+          contrast={1.4}
+          gamma={1}
+          saturation={1}
+          centerX={0}
+          centerY={0}
+          zoom={0.9}
+        />
+      );
+
+    /* OPACO: monta su propio fondo negro dentro del lienzo. */
+    case "beams":
+      return (
+        <Beams
+          beamWidth={2}
+          beamHeight={15}
+          beamNumber={12}
+          lightColor={AZUL_CLARO}
+          speed={1.6}
+          noiseIntensity={1.4}
+          scale={0.2}
+          rotation={20}
+        />
+      );
+
+    case "galaxia":
+      return (
+        <Galaxy
+          density={1.1}
+          starSpeed={0.4}
+          speed={0.8}
+          /* 210 grados cae en el azul; el 140 del ejemplo es verde. */
+          hueShift={210}
+          saturation={0.55}
+          glowIntensity={0.35}
+          twinkleIntensity={0.3}
+          rotationSpeed={0.06}
+          mouseInteraction={conPuntero}
+          mouseRepulsion={conPuntero}
+          repulsionStrength={1.6}
+          transparent
+        />
+      );
+
+    /* OPACO: su propio clearColor es blanco y el shader devuelve alfa 1. */
+    case "cromo":
+      return (
+        <LiquidChrome
+          baseColor={[0.02, 0.24, 0.45]}
+          speed={0.25}
+          amplitude={0.35}
+          frequencyX={3}
+          frequencyY={3}
+          interactive={conPuntero}
         />
       );
 

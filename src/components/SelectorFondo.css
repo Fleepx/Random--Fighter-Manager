@@ -94,6 +94,10 @@
   border-radius: var(--radius-md);
   background: var(--superficie);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+  /* Ya son doce candidatos y la lista se salia de la ventana. */
+  max-height: 60vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .selfondo__opcion {
