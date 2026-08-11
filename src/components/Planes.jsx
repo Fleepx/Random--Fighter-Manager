@@ -30,9 +30,13 @@ function Plan({ plan, periodo, indice }) {
       }`}
       ref={ref}
     >
-      {plan.insignia && <p className="plan__insignia">{plan.insignia}</p>}
-
-      <h3 className="plan__nombre">{plan.nombre}</h3>
+      {/* La insignia va en la misma linea que el nombre y pegada al borde
+          derecho. Encima ocupaba un renglon propio, y solo en esta tarjeta:
+          empujaba su contenido y descalzaba los titulos de las tres. */}
+      <div className="plan__encabezado">
+        <h3 className="plan__nombre">{plan.nombre}</h3>
+        {plan.insignia && <p className="plan__insignia">{plan.insignia}</p>}
+      </div>
       <p className="plan__descripcion">{plan.descripcion}</p>
 
       <p className="plan__precio">

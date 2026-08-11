@@ -89,9 +89,20 @@
   border-width: 2px;
 }
 
+/* Nombre a la izquierda, insignia contra el borde derecho. Alineados por
+   la linea base y no por el centro: si no, la insignia queda flotando alto
+   respecto de un titulo que la triplica en cuerpo. */
+.plan__encabezado {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-200);
+  margin-bottom: var(--space-75);
+}
+
 .plan__insignia {
-  align-self: flex-start;
-  margin-bottom: var(--space-200);
+  flex-shrink: 0;
+  margin: 0;
   padding: var(--space-25) var(--space-100);
   background: var(--azul);
   color: #fff;
@@ -109,7 +120,7 @@
   font-weight: 900;
   text-transform: uppercase;
   color: var(--texto);
-  margin: 0 0 var(--space-75);
+  margin: 0;
 }
 
 .plan__descripcion {
