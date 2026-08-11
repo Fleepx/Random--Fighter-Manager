@@ -1,17 +1,27 @@
 import { useState } from "react";
-import { PERIODOS, PLANES, PRIMER_MES_GRATIS } from "../data/site";
+import {
+  PERIODOS,
+  PLANES,
+  PRIMER_MES_GRATIS,
+  SEDES_ADICIONALES,
+  calcularAhorro,
+  formatearPrecio,
+} from "../data/site";
 import { useReveal } from "../hooks/useReveal";
 import "./Planes.css";
 
 const RASGADOS = ["", " rf-rasgado--2", " rf-rasgado--3"];
 
+const SUFIJO = {
+  mensual: "al mes",
+  semestral: "al semestre",
+  anual: "al año",
+};
+
 function Plan({ plan, periodo, indice }) {
   const ref = useReveal({ delay: indice * 90 });
-  const precio = plan.precios[periodo];
-
-  /* Platinum no se vende por mes. En vez de mostrar un precio inventado o
-     un boton muerto, la tarjeta lo dice y manda al periodo que si existe. */
-  const sinPrecio = !precio.monto;
+  const monto = formatearPrecio(plan.precios[periodo]);
+  const ahorro = calcularAhorro(plan.precios, periodo);
 
   return (
     <article
@@ -26,14 +36,15 @@ function Plan({ plan, periodo, indice }) {
       <p className="plan__descripcion">{plan.descripcion}</p>
 
       <p className="plan__precio">
-        {sinPrecio ? (
-          <span className="plan__sin-precio">{precio.periodo}</span>
-        ) : (
-          <>
-            <span className="plan__monto">{precio.monto}</span>
-            <span className="plan__periodo">{precio.periodo}</span>
-          </>
-        )}
+        <span className="plan__monto">{monto}</span>
+        <span className="plan__periodo">{SUFIJO[periodo]}, IVA incluido</span>
+      </p>
+
+      {/* El ahorro se calcula por plan y no sale del selector de periodo:
+          no es parejo. El anual de Pro descuenta 32% y el de Plus 20%, asi
+          que una sola cifra arriba mentiria en dos de las tres tarjetas. */}
+      <p className="plan__ahorro">
+        {ahorro ? `Ahorras ${ahorro}% frente al mensual` : " "}
       </p>
 
       <ul className="plan__incluye">
@@ -54,6 +65,43 @@ function Plan({ plan, periodo, indice }) {
         {plan.cta}
       </a>
     </article>
+  );
+}
+
+/* Las sedes extra no son un cuarto plan sino un agregado sobre el
+   contratado, asi que van en una tabla y no en una tarjeta: compiten por
+   atencion con la decision principal y no deberian ganarla. */
+function Sedes({ periodo }) {
+  const ref = useReveal();
+
+  return (
+    <div className="sedes rf-reveal" ref={ref}>
+      <h3 className="sedes__titulo">¿Tienes más de una sede?</h3>
+      <p className="sedes__bajada">
+        Cada sede adicional se suma a tu plan como una suscripción aparte,
+        al mismo nivel que contrataste.
+      </p>
+
+      <ul className="sedes__lista">
+        {SEDES_ADICIONALES.map((sede) => {
+          const monto = formatearPrecio(sede.precios[periodo]);
+          return (
+            <li key={sede.id} className="sede">
+              <span className="sede__nombre">{sede.nombre}</span>
+              {monto ? (
+                <span className="sede__precio">
+                  {monto} <span className="sede__periodo">{SUFIJO[periodo]}</span>
+                </span>
+              ) : (
+                /* Pro no se vende por mes en sedes extra. Antes que inventar
+                   una cifra o dejar el hueco, la fila lo dice. */
+                <span className="sede__sin-precio">Solo semestral o anual</span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
@@ -84,12 +132,11 @@ export default function Planes() {
                 aria-pressed={periodo === p.clave}
               >
                 {p.etiqueta}
-                {p.descuento && (
-                  <span className="periodo__descuento">−{p.descuento}</span>
-                )}
               </button>
             ))}
           </div>
+
+          <p className="planes__iva">Todos los precios incluyen IVA</p>
         </header>
 
         <div className="planes__grid">
@@ -98,8 +145,10 @@ export default function Planes() {
           ))}
         </div>
 
+        <Sedes periodo={periodo} />
+
         <p className="planes__pie">
-          Precios en pesos chilenos, sin IVA. ¿Necesitas algo distinto?{" "}
+          Precios en pesos chilenos, IVA incluido. ¿Necesitas algo distinto?{" "}
           <a href="#contacto">Escríbenos</a>.
         </p>
       </div>

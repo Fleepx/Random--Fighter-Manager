@@ -80,24 +80,44 @@ export const PASOS = [
   },
 ];
 
-/* Precios reales del proyecto. En pesos chilenos, sin IVA incluido. */
+/* Precios reales del proyecto, en pesos chilenos y CON IVA INCLUIDO.
+   Van como numeros enteros a proposito: el formato y el descuento se
+   calculan (ver mas abajo). Escritos a mano se desincronizan al primer
+   cambio de tarifa, y el descuento ya no es parejo entre planes. */
 export const PERIODOS = [
-  { clave: "mensual",   etiqueta: "Mensual",   descuento: null },
-  { clave: "semestral", etiqueta: "Semestral", descuento: "15%" },
-  { clave: "anual",     etiqueta: "Anual",     descuento: "20%" },
+  { clave: "mensual",   etiqueta: "Mensual",   meses: 1 },
+  { clave: "semestral", etiqueta: "Semestral", meses: 6 },
+  { clave: "anual",     etiqueta: "Anual",     meses: 12 },
 ];
+
+const clp = new Intl.NumberFormat("es-CL", {
+  style: "currency",
+  currency: "CLP",
+  maximumFractionDigits: 0,
+});
+
+export const formatearPrecio = (monto) =>
+  monto == null ? null : clp.format(monto);
+
+/**
+ * Cuanto se ahorra frente a pagar mes a mes, redondeado al entero.
+ * Devuelve null cuando no hay con que comparar: sin precio mensual no hay
+ * ahorro que calcular, y en el periodo mensual no hay nada que comparar.
+ */
+export function calcularAhorro(precios, clave) {
+  const meses = PERIODOS.find((p) => p.clave === clave)?.meses ?? 1;
+  if (meses === 1 || precios.mensual == null || precios[clave] == null) return null;
+  const ahorro = 1 - precios[clave] / (precios.mensual * meses);
+  return ahorro > 0.005 ? Math.round(ahorro * 100) : null;
+}
 
 export const PLANES = [
   {
-    id: "silver",
-    nombre: "Silver",
+    id: "plus",
+    nombre: "Plus",
     descripcion:
       "Para academias que están comenzando y quieren ordenar su gestión.",
-    precios: {
-      mensual:   { monto: "$39.900", periodo: "+ IVA al mes" },
-      semestral: { monto: "$203.490", periodo: "+ IVA al semestre" },
-      anual:     { monto: "$382.900", periodo: "+ IVA al año" },
-    },
+    precios: { mensual: 47990, semestral: 244990, anual: 459990 },
     incluye: [
       "Hasta 120 alumnos",
       "Hasta 2 instructores",
@@ -109,17 +129,13 @@ export const PLANES = [
     destacado: false,
   },
   {
-    id: "gold",
-    nombre: "Gold",
+    id: "blue",
+    nombre: "Blue",
     descripcion:
       "Para academias en crecimiento, con más sedes e instructores.",
-    precios: {
-      mensual:   { monto: "$69.900", periodo: "+ IVA al mes" },
-      semestral: { monto: "$356.900", periodo: "+ IVA al semestre" },
-      anual:     { monto: "$671.900", periodo: "+ IVA al año" },
-    },
+    precios: { mensual: 83990, semestral: 424990, anual: 799990 },
     incluye: [
-      "Todo lo del plan Silver",
+      "Todo lo del plan Plus",
       "Hasta 250 alumnos",
       "Hasta 5 instructores",
       "Hasta 240 clases al mes",
@@ -130,14 +146,10 @@ export const PLANES = [
     insignia: "Más elegido",
   },
   {
-    id: "platinum",
-    nombre: "Platinum",
+    id: "pro",
+    nombre: "Pro",
     descripcion: "Para academias consolidadas que necesitan todo el control.",
-    precios: {
-      mensual:   { monto: null, periodo: "Solo semestral o anual" },
-      semestral: { monto: "$1.121.949", periodo: "+ IVA al semestre" },
-      anual:     { monto: "$2.111.900", periodo: "+ IVA al año" },
-    },
+    precios: { mensual: 147990, semestral: 709990, anual: 1199990 },
     incluye: [
       "Hasta 1.000 alumnos",
       "Hasta 10 instructores",
@@ -148,8 +160,15 @@ export const PLANES = [
     ],
     cta: "Hablar con ventas",
     destacado: false,
-    soloLargoPlazo: true,
   },
+];
+
+/* Suscripcion aparte por cada sede extra, sobre el plan contratado.
+   El nivel Pro no tiene tarifa mensual: solo semestral o anual. */
+export const SEDES_ADICIONALES = [
+  { id: "plus", nombre: "Plus", precios: { mensual: 40900, semestral: 214990, anual: 394990 } },
+  { id: "blue", nombre: "Blue", precios: { mensual: 72990, semestral: 369990, anual: 679990 } },
+  { id: "pro",  nombre: "Pro",  precios: { mensual: null,  semestral: 609990, anual: 959990 } },
 ];
 
 export const PREGUNTAS = [

@@ -124,9 +124,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-25);
-  margin: 0 0 var(--space-400);
-  padding-bottom: var(--space-400);
-  border-bottom: 1px solid var(--borde);
+  margin: 0 0 var(--space-100);
 }
 .plan__monto {
   font-family: 'Barlow Condensed', sans-serif;
@@ -135,12 +133,121 @@
   line-height: 1;
   color: var(--texto);
 }
-.plan__periodo,
-.plan__sin-precio {
+.plan__periodo {
   font-size: var(--text-sm);
   color: var(--texto-suave);
 }
-.plan__sin-precio { font-style: normal; }
+
+/* Reserva su linea aunque el periodo sea mensual y no haya ahorro que
+   mostrar: si apareciera y desapareciera, las tres tarjetas saltarian de
+   alto cada vez que se cambia de periodo. */
+.plan__ahorro {
+  min-height: 1.4em;
+  margin: 0 0 var(--space-400);
+  padding-bottom: var(--space-400);
+  border-bottom: 1px solid var(--borde);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+/* ─── Aviso de IVA ─── */
+/* Va junto al selector de periodo y no solo al pie: es donde se mira el
+   precio, y en Chile la diferencia entre neto y bruto decide la compra. */
+.planes__iva {
+  margin: var(--space-300) 0 0;
+  font-size: var(--text-sm);
+  color: var(--texto-suave);
+}
+
+/* ─── Sedes adicionales ─── */
+
+.sedes {
+  margin-top: var(--space-700);
+  padding: var(--space-500);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-lg);
+  background: var(--superficie);
+}
+
+.sedes__titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--texto);
+  margin: 0 0 var(--space-200);
+}
+
+.sedes__bajada {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--texto-suave);
+  max-width: var(--measure);
+  margin: 0 0 var(--space-400);
+  text-wrap: pretty;
+}
+
+.sedes__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-300);
+}
+
+.sede {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  padding: var(--space-300);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius-md);
+}
+
+.sede__nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+.sede__precio {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--texto);
+}
+.sede__periodo {
+  display: block;
+  margin-top: var(--space-25);
+  font-family: 'Barlow', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--texto-suave);
+}
+
+.sede__sin-precio {
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 720px) {
+  .sedes { padding: var(--space-400); }
+  .sedes__lista { grid-template-columns: 1fr; }
+  .sede { flex-direction: row; align-items: baseline; justify-content: space-between; }
+  .sede__periodo { display: inline; margin: 0; }
+}
 
 .plan__incluye {
   list-style: none;
