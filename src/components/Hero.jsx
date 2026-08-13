@@ -1,7 +1,7 @@
 import { PRIMER_MES_GRATIS } from "../data/site";
 import { useReveal } from "../hooks/useReveal";
 import Marca from "./Marca";
-import captura from "../assets/imgs/RFM-Screenshot.jpeg";
+import captura from "../assets/imgs/RFM-Screenshot.png";
 import "./Hero.css";
 
 export default function Hero() {

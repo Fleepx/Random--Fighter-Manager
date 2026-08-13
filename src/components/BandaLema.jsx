@@ -15,7 +15,7 @@ import { useReveal } from "../hooks/useReveal";
 import { usePunteroFino } from "../hooks/usePunteroFino";
 import "./BandaLema.css";
 
-const LEMA = ["Administra", "Cobra", "Crece"];
+const LEMA = ["Administra", "Entrena", "Crece"];
 
 /* Paleta del sitio. Ninguno de estos fondos usa los colores de su propia
    documentacion: los ejemplos vienen en rosa y violeta, que no existen en
