@@ -277,6 +277,12 @@
     align-items: stretch;
 
     overflow-x: auto;
+    /* Explicito, y no por descarte. Con overflow-x en auto y el otro eje en
+       visible, el navegador convierte ese otro eje a auto: el contenedor
+       pasa a ser desplazable tambien en vertical y se queda con el gesto.
+       Bastaba un pixel sobrante para que arrastrar desde aca moviera la
+       fila un poco y la pagina nada. */
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     /* Que el gesto no arrastre la pagina entera por detras al llegar al
@@ -305,6 +311,14 @@
   /* En tactil no hay hover, y el desplazamiento del hover pelea con el
      arrastre: la tarjeta salta mientras el dedo la mueve. */
   .plan:hover { transform: none; }
+
+  /* El reveal entra desplazando 2rem hacia abajo, y esos 32px eran los que
+     sobraban a lo alto dentro de la fila. Aca la tarjeta solo aparece: sin
+     el desplazamiento no hay nada que sobre, y con la vertical ya cerrada
+     tampoco habria donde ponerlo sin recortarlo.
+     Un movimiento vertical dentro de un carrusel horizontal tampoco venia
+     a cuento. */
+  .planes__grid .rf-reveal { transform: none; }
 }
 
 /* ─── Cambio de periodo ─── */
