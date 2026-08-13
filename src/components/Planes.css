@@ -261,6 +261,69 @@
 }
 .planes__pie a:hover { border-color: var(--azul); }
 
-@media (max-width: 640px) {
-  .plan { padding: var(--space-500) var(--space-400); }
+/* ─── Carrusel en pantallas angostas ─── */
+/* Apiladas, las tres tarjetas obligan a recorrer media pagina para llegar
+   a la tercera y no se pueden comparar: cuando ves una, la otra ya salio
+   de cuadro. En fila y con arrastre lateral quedan a un gesto.
+
+   El desplazamiento y la inercia los pone el sistema; scroll-snap solo
+   decide donde se detiene. Nada de esto necesita JavaScript ni escuchar el
+   scroll, que es justo lo que se evita en el resto del proyecto. */
+@media (max-width: 760px) {
+  .planes__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: var(--space-300);
+    align-items: stretch;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /* Que el gesto no arrastre la pagina entera por detras al llegar al
+       final de la fila. */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+
+    /* La fila sangra hasta los bordes de la pantalla y recupera el aire por
+       dentro. Asi la tarjeta de al lado asoma en el canto, que es lo que
+       avisa que hay mas sin necesidad de flechas ni instrucciones. */
+    margin-inline: calc(var(--space-400) * -1);
+    padding-inline: var(--space-400);
+    scroll-padding-inline: var(--space-400);
+
+    /* La barra sobra: el gesto ya es la interfaz. */
+    scrollbar-width: none;
+  }
+  .planes__grid::-webkit-scrollbar { display: none; }
+
+  .plan {
+    flex: 0 0 84%;
+    max-width: 340px;
+    scroll-snap-align: center;
+    padding: var(--space-500) var(--space-400);
+  }
+  /* En tactil no hay hover, y el desplazamiento del hover pelea con el
+     arrastre: la tarjeta salta mientras el dedo la mueve. */
+  .plan:hover { transform: none; }
+}
+
+/* ─── Cambio de periodo ─── */
+/* Las cifras entran subiendo en vez de saltar de golpe. React remonta este
+   bloque al cambiar el periodo (lleva key), y con eso la animacion se
+   vuelve a lanzar sola; sin la key el elemento es el mismo y no se repite. */
+@keyframes precio-entra {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.plan__precio,
+.plan__ahorro,
+.plan__sede {
+  animation: precio-entra var(--dur-base) var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planes__grid { scroll-behavior: auto; }
+  .plan__precio,
+  .plan__ahorro,
+  .plan__sede { animation: none; }
 }

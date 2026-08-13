@@ -39,7 +39,7 @@ function Plan({ plan, periodo, indice }) {
       </div>
       <p className="plan__descripcion">{plan.descripcion}</p>
 
-      <p className="plan__precio">
+      <p className="plan__precio" key={`precio-${periodo}`}>
         <span className="plan__monto">{monto}</span>
         <span className="plan__periodo">{SUFIJO[periodo]}, IVA incluido</span>
       </p>
@@ -47,7 +47,7 @@ function Plan({ plan, periodo, indice }) {
       {/* El ahorro se calcula por plan y no sale del selector de periodo:
           no es parejo. El anual de Pro descuenta 32% y el de Plus 20%, asi
           que una sola cifra arriba mentiria en dos de las tres tarjetas. */}
-      <p className="plan__ahorro">
+      <p className="plan__ahorro" key={`ahorro-${periodo}`}>
         {ahorro ? `Ahorras ${ahorro}% frente al mensual` : " "}
       </p>
 
@@ -55,7 +55,7 @@ function Plan({ plan, periodo, indice }) {
           un bloque aparte al pie. Abajo quedaba lejos del selector de
           periodo: se cambiaba de periodo arriba sin ver que esas cifras
           tambien se movian, o se leian sin saber a que periodo eran. */}
-      <p className="plan__sede">
+      <p className="plan__sede" key={`sede-${periodo}`}>
         <span className="plan__sede-etiqueta">Sede adicional</span>
         {/* Sin precio va con la misma estructura que con precio, cifra
             grande arriba y aclaracion chica abajo, para que las dos midan
